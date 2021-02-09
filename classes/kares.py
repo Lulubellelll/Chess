@@ -1,0 +1,87 @@
+from .squares import *
+from .pieces import *
+
+
+class KARES(object):
+    def __init__(self, sq, KARE):
+        self.sq = sq
+        self.KARE = KARE
+
+
+A1C = KARES(a1, A1)
+A2C = KARES(a2, A2)
+A3C = KARES(a3, A3)
+A4C = KARES(a4, A4)
+A5C = KARES(a5, A5)
+A6C = KARES(a6, A6)
+A7C = KARES(a7, A7)
+A8C = KARES(a8, A8)
+
+B1C = KARES(b1, B1)
+B2C = KARES(b2, B2)
+B3C = KARES(b3, B3)
+B4C = KARES(b4, B4)
+B5C = KARES(b5, B5)
+B6C = KARES(b6, B6)
+B7C = KARES(b7, B7)
+B8C = KARES(a8, B8)
+
+C1C = KARES(c1, C1)
+C2C = KARES(c2, C2)
+C3C = KARES(c3, C3)
+C4C = KARES(c4, C4)
+C5C = KARES(c5, C5)
+C6C = KARES(c6, C6)
+C7C = KARES(c7, C7)
+C8C = KARES(c8, C8)
+
+D1C = KARES(d1, D1)
+D2C = KARES(d2, D2)
+D3C = KARES(d3, D3)
+D4C = KARES(d4, D4)
+D5C = KARES(d5, D5)
+D6C = KARES(d6, D6)
+D7C = KARES(d7, D7)
+D8C = KARES(d8, D8)
+
+E1C = KARES(e1, E1)
+E2C = KARES(e2, E2)
+E3C = KARES(e3, E3)
+E4C = KARES(e4, E4)
+E5C = KARES(e5, E5)
+E6C = KARES(e6, E6)
+E7C = KARES(e7, E7)
+E8C = KARES(e8, E8)
+
+F1C = KARES(f1, F1)
+F2C = KARES(f2, F2)
+F3C = KARES(f3, F3)
+F4C = KARES(f4, F4)
+F5C = KARES(f5, F5)
+F6C = KARES(f6, F6)
+F7C = KARES(f7, F7)
+F8C = KARES(f8, F8)
+
+G1C = KARES(g1, G1)
+G2C = KARES(g2, G2)
+G3C = KARES(g3, G3)
+G4C = KARES(g4, G4)
+G5C = KARES(g5, G5)
+G6C = KARES(g6, G6)
+G7C = KARES(g7, G7)
+G8C = KARES(g8, G8)
+
+H1C = KARES(h1, H1)
+H2C = KARES(h2, H2)
+H3C = KARES(h3, H3)
+H4C = KARES(h4, H4)
+H5C = KARES(h5, H5)
+H6C = KARES(h6, H6)
+H7C = KARES(h7, H7)
+H8C = KARES(h8, G8)
+
+kares = [A1C, A2C, A3C, A4C, A5C, A6C, A7C, A8C, B1C, B2C, B3C, B4C, B5C,
+         B6C, B7C, B8C, C1C, C2C, C3C, C4C, C5C, C6C, C7C, C8C, D1C, D2C, D3C, D4C,
+         D5C, D6C, D7C, D8C, E1C, E2C, E3C, E4C, E5C, E6C, E7C, E8C, F1C, F2C, F3C,
+         F4C, F5C, F6C, F7C, F8C, G1C, G2C, G3C, G4C, G5C, G6C, G7C, G8C, H1C, H2C,
+         H3C, H4C, H5C, H6C, H7C, H8C]
