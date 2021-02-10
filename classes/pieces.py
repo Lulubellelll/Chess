@@ -22,9 +22,8 @@ class Pieces(object):
 
 
 class Kale(Pieces):
-    def __init__(self, color, alive, posx, posy, scolor, img):
+    def __init__(self, color, alive, posx, posy, img):
         super().__init__(color, alive, posx, posy, img)
-        self.scolor = scolor
 
     def press(self, id, square):
         print(ids)
@@ -250,7 +249,7 @@ class Fil(Pieces):
 # PIECES
 SF = Fil('siyah', True, a2[0], a2[2], 'black', BB)
 BF = Fil('beyaz', True, d5[0], d5[2], 'black', WB)
-SK = Kale('siyah', True, a1[0], a1[2], 'Black', BR)
+SK = Kale('siyah', True, a1[0], a1[2], BR)
 
 pieces = [SF, BF, SK]
 

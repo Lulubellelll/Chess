@@ -31,32 +31,34 @@ while running:
                     # Eat
                     if e.sq[6] and e.sq[5] == False:
                         print('eat')
+                        if Choosen[0].onIt.color != e.KARE.onIt.color:
+                            e.KARE.onIt.death()
+                            print(e.KARE.onIt.alive)
 
-                        e.KARE.onIt.death()
-                        print(e.KARE.onIt.alive)
+                            for elements in squares:
+                                if elements[5]:
+                                    elements[5] = False
+                                else:
+                                    pass
 
-                        for elements in squares:
-                            if elements[5]:
-                                elements[5] = False
-                            else:
-                                pass
+                            for elements in squares:
+                                if elements[6]:
+                                    elements[6] = False
+                                else:
+                                    pass
 
-                        for elements in squares:
-                            if elements[6]:
-                                elements[6] = False
-                            else:
-                                pass
-
-                        seçilmiş = Choosen[0]
-                        e.KARE.change_onIt(seçilmiş.onIt)
-                        e.KARE.change_sit(seçilmiş.situation)
-                        seçilmiş.onIt.posx = e.sq[0]
-                        seçilmiş.onIt.posy = e.sq[2]
-                        seçilmiş.change_onIt('Empty')
-                        seçilmiş.change_sit('empty')
-                        delChoosen()
-                        reClick = not reClick
-                        beyazOynar = not beyazOynar
+                            seçilmiş = Choosen[0]
+                            e.KARE.change_onIt(seçilmiş.onIt)
+                            e.KARE.change_sit(seçilmiş.situation)
+                            seçilmiş.onIt.posx = e.sq[0]
+                            seçilmiş.onIt.posy = e.sq[2]
+                            seçilmiş.change_onIt('Empty')
+                            seçilmiş.change_sit('empty')
+                            delChoosen()
+                            reClick = not reClick
+                            beyazOynar = not beyazOynar
+                        else:
+                            print('KENDİ TAŞINI YİYEMEZSİN')
                     # Empty   
                     elif e.KARE.onIt == 'Empty' and e.sq[5] == False:
                         pass
