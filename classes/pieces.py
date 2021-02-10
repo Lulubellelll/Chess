@@ -7,6 +7,7 @@ Choosen = []
 fulls = []
 tehditfulls = []
 
+
 # CLASSES
 class Pieces(object):
     def __init__(self, color, alive, posx, posy, img):
@@ -18,6 +19,102 @@ class Pieces(object):
 
     def death(self):
         self.alive = False
+
+
+class Kale(Pieces):
+    def __init__(self, color, alive, posx, posy, scolor, img):
+        super().__init__(color, alive, posx, posy, img)
+        self.scolor = scolor
+
+    def press(self, id, square):
+        print(ids)
+
+        sat = (id // 8) + 1
+        süt = (id % 8) + 1
+
+        print('sat: ', sat)
+        print('süt: ', süt)
+
+        for x in kareler:
+            if x.onIt != 'Empty':
+                fulls.append(x.id[4])
+
+        print(fulls)
+
+        # Sağ
+        for i in range(1, 9 - süt):
+            if (id + 1 * i) in fulls:
+                tehditfulls.append(id + 1 * i)
+                break
+            else:
+                ids.append(id + 1 * i)
+
+        # Sol
+        for i in range(1, süt):
+            if (id - 1 * i) in fulls:
+                tehditfulls.append(id - 1 * i)
+                break
+            else:
+                ids.append(id - 1 * i)
+
+        # Aşşağı
+        for i in range(1, sat):
+            if (id - 8 * i) in fulls:
+                tehditfulls.append(id - 8 * i)
+                break
+            else:
+                ids.append(id - 8 * i)
+
+        # Yukarı
+        for i in range(1, 9 - sat):
+            if (id + 8 * i) in fulls:
+                tehditfulls.append(id + 8 * i)
+                break
+            else:
+                ids.append(id + 8 * i)
+
+        del_dup(ids)
+        Choosen.append(square)
+        print(ids, Choosen, tehditfulls)
+
+        for elements in squares:
+            if elements[4] in ids:
+                elements[5] = True
+            else:
+                pass
+
+        for elements in squares:
+            if elements[4] in tehditfulls:
+                elements[6] = True
+            else:
+                pass
+
+        for elements in squares:
+            if elements[6]:
+                print(elements)
+
+        ids.clear()
+        fulls.clear()
+        tehditfulls.clear()
+
+    def press_again(self):
+        for elements in squares:
+            if elements[5]:
+                elements[5] = False
+            else:
+                pass
+
+        for elements in squares:
+            if elements[6]:
+                elements[6] = False
+            else:
+                pass
+
+        ids.clear()
+        Choosen.clear()
+        tehditfulls.clear()
+        fulls.clear()
+        print(ids, Choosen, fulls)
 
 
 class Fil(Pieces):
@@ -56,7 +153,6 @@ class Fil(Pieces):
                     break
                 else:
                     ids.append(id + 9 * i)
-
 
         # Sol Aşşağı
         if sat >= süt:
@@ -154,13 +250,15 @@ class Fil(Pieces):
 # PIECES
 SF = Fil('siyah', True, a2[0], a2[2], 'black', BB)
 BF = Fil('beyaz', True, d5[0], d5[2], 'black', WB)
+SK = Kale('siyah', True, a1[0], a1[2], 'Black', BR)
 
-pieces = [SF, BF]
+pieces = [SF, BF, SK]
 
 
 # FUNCTIONS
 def delChoosen():
     Choosen.clear()
+
 
 def del_dup(test_list):
     return list(set(test_list))
@@ -179,7 +277,8 @@ class Kareler(object):
     def change_sit(self, situation):
         self.situation = situation
 
-A1 = Kareler('full', 'Empty', a1)
+
+A1 = Kareler('full', SK, a1)
 A2 = Kareler('empty', SF, a2)
 A3 = Kareler('empty', 'Empty', a3)
 A4 = Kareler('empty', 'Empty', a4)

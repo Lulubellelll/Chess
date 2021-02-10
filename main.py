@@ -1,6 +1,3 @@
-import pygame
-from classes.pieces import *
-from classes.squares import *
 from classes.kares import *
 from classes.images import *
 
@@ -12,7 +9,6 @@ screen = pygame.display.set_mode([980, 980])
 # Definitions Out
 reClick = False
 beyazOynar = True
-
 
 # Run until the user asks to quit
 running = True
@@ -31,10 +27,6 @@ while running:
                 # Pick
                 if mx in range(e.sq[0], e.sq[1]) and my in range(e.sq[2], e.sq[3]):
                     print(beyazOynar, 'bo0')
-                    for elements in squares:
-                        if elements[6]:
-                            print('burası', elements)
-                   
 
                     # Eat
                     if e.sq[6] and e.sq[5] == False:
@@ -63,6 +55,7 @@ while running:
                         seçilmiş.change_onIt('Empty')
                         seçilmiş.change_sit('empty')
                         delChoosen()
+                        reClick = not reClick
                         beyazOynar = not beyazOynar
                     # Empty   
                     elif e.KARE.onIt == 'Empty' and e.sq[5] == False:
@@ -112,7 +105,7 @@ while running:
                                     print(beyazOynar, 'bo1')
                             else:
                                 print('YANLIŞ SIRA')
-                                
+
         if event.type == pygame.QUIT:
             running = False
 
