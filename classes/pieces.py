@@ -246,12 +246,174 @@ class Fil(Pieces):
         print(ids, Choosen, fulls)
 
 
+class Vezir(Pieces):
+    def __init__(self, color, alive, posx, posy, img):
+        super().__init__(color, alive, posx, posy, img)
+
+    def press(self, id, square):
+        print(ids)
+
+        sat = (id // 8) + 1
+        süt = (id % 8) + 1
+
+        print('sat: ', sat)
+        print('süt: ', süt)
+
+        for x in kareler:
+            if x.onIt != 'Empty':
+                fulls.append(x.id[4])
+
+        print(fulls)
+
+        # Sağ Yukarı
+        if sat >= süt:
+            for i in range(1, 9 - sat):
+                if (id + 9 * i) in fulls:
+                    tehditfulls.append(id + 9 * i)
+                    break
+                else:
+                    ids.append(id + 9 * i)
+        else:
+            for i in range(1, (8 - süt) + 1):
+                if (id + 9 * i) in fulls:
+                    tehditfulls.append(id + 9 * i)
+                    break
+                else:
+                    ids.append(id + 9 * i)
+
+        # Sol Aşşağı
+        if sat >= süt:
+            for i in range(1, süt):
+                if (id - 9 * i) in fulls:
+                    tehditfulls.append(id - 9 * i)
+                    break
+                else:
+                    ids.append(id - 9 * i)
+        else:
+            for i in range(1, sat):
+                if (id - 9 * i) in fulls:
+                    tehditfulls.append(id - 9 * i)
+                    break
+                else:
+                    ids.append(id - 9 * i)
+
+        # Sol Yukarı
+        if sat + süt >= 9:
+            for i in range(1, (8 - sat) + 1):
+                if (id + 7 * i) in fulls:
+                    tehditfulls.append(id + 7 * i)
+                    break
+                else:
+                    ids.append(id + 7 * i)
+        else:
+            for i in range(1, süt):
+                if (id + 7 * i) in fulls:
+                    tehditfulls.append(id + 7 * i)
+                    break
+                else:
+                    ids.append(id + 7 * i)
+
+        # sağ Aşşağı
+        if sat + süt >= 9:
+            for i in range(1, 9 - süt):
+                if (id - 7 * i) in fulls:
+                    tehditfulls.append(id - 7 * i)
+                    break
+                else:
+                    ids.append(id - 7 * i)
+        else:
+            for i in range(1, sat):
+                if (id - 7 * i) in fulls:
+                    tehditfulls.append(id - 7 * i)
+                    break
+                else:
+                    ids.append(id - 7 * i)
+
+        # Sağ
+        for i in range(1, 9 - süt):
+            if (id + 1 * i) in fulls:
+                tehditfulls.append(id + 1 * i)
+                break
+            else:
+                ids.append(id + 1 * i)
+
+        # Sol
+        for i in range(1, süt):
+            if (id - 1 * i) in fulls:
+                tehditfulls.append(id - 1 * i)
+                break
+            else:
+                ids.append(id - 1 * i)
+
+        # Aşşağı
+        for i in range(1, sat):
+            if (id - 8 * i) in fulls:
+                tehditfulls.append(id - 8 * i)
+                break
+            else:
+                ids.append(id - 8 * i)
+
+        # Yukarı
+        for i in range(1, 9 - sat):
+            if (id + 8 * i) in fulls:
+                tehditfulls.append(id + 8 * i)
+                break
+            else:
+                ids.append(id + 8 * i)
+
+
+
+        del_dup(ids)
+        Choosen.append(square)
+        print(ids, Choosen, tehditfulls)
+
+        for elements in squares:
+            if elements[4] in ids:
+                elements[5] = True
+            else:
+                pass
+
+        for elements in squares:
+            if elements[4] in tehditfulls:
+                elements[6] = True
+            else:
+                pass
+
+        for elements in squares:
+            if elements[6]:
+                print(elements)
+
+        ids.clear()
+        fulls.clear()
+        tehditfulls.clear()
+
+    def press_again(self):
+        for elements in squares:
+            if elements[5]:
+                elements[5] = False
+            else:
+                pass
+
+        for elements in squares:
+            if elements[6]:
+                elements[6] = False
+            else:
+                pass
+
+        ids.clear()
+        Choosen.clear()
+        tehditfulls.clear()
+        fulls.clear()
+        print(ids, Choosen, fulls)
+
+
 # PIECES
 SF = Fil('siyah', True, a2[0], a2[2], 'black', BB)
 BF = Fil('beyaz', True, d5[0], d5[2], 'black', WB)
 SK = Kale('siyah', True, a1[0], a1[2], BR)
+SV = Vezir('beyaz', True, b1[0], b1[2], WQ)
 
-pieces = [SF, BF, SK]
+pieces = [SF, BF, SK, SV]
 
 
 # FUNCTIONS
@@ -286,7 +448,7 @@ A6 = Kareler('empty', 'Empty', a6)
 A7 = Kareler('empty', 'Empty', a7)
 A8 = Kareler('empty', 'Empty', a8)
 
-B1 = Kareler('empty', 'Empty', b1)
+B1 = Kareler('empty', SV, b1)
 B2 = Kareler('empty', 'Empty', b2)
 B3 = Kareler('empty', 'Empty', b3)
 B4 = Kareler('empty', 'Empty', b4)
