@@ -361,7 +361,120 @@ class Vezir(Pieces):
             else:
                 ids.append(id + 8 * i)
 
+        del_dup(ids)
+        Choosen.append(square)
+        print(ids, Choosen, tehditfulls)
 
+        for elements in squares:
+            if elements[4] in ids:
+                elements[5] = True
+            else:
+                pass
+
+        for elements in squares:
+            if elements[4] in tehditfulls:
+                elements[6] = True
+            else:
+                pass
+
+        for elements in squares:
+            if elements[6]:
+                print(elements)
+
+        ids.clear()
+        fulls.clear()
+        tehditfulls.clear()
+
+    def press_again(self):
+        for elements in squares:
+            if elements[5]:
+                elements[5] = False
+            else:
+                pass
+
+        for elements in squares:
+            if elements[6]:
+                elements[6] = False
+            else:
+                pass
+
+        ids.clear()
+        Choosen.clear()
+        tehditfulls.clear()
+        fulls.clear()
+        print(ids, Choosen, fulls)
+
+
+class At(Pieces):
+    def __init__(self, color, alive, posx, posy, img):
+        super().__init__(color, alive, posx, posy, img)
+
+    def press(self, id, square):
+        print(ids)
+
+        sat = (id // 8) + 1
+        süt = (id % 8) + 1
+
+        print('sat: ', sat)
+        print('süt: ', süt)
+
+        for x in kareler:
+            if x.onIt != 'Empty':
+                fulls.append(x.id[4])
+
+        print(fulls)
+
+        # Yukarı
+        if sat != 7 and sat != 8 and süt != 8:
+            if (id + 17) in fulls:
+                tehditfulls.append(id + 17)
+            else:
+                ids.append(id + 17)
+
+        if sat != 7 and sat != 8 and süt != 1:
+            if (id + 15) in fulls:
+                tehditfulls.append(id + 15)
+            else:
+                ids.append(id + 15)
+
+        # Aşşağı
+        if sat != 1 and sat != 2 and süt != 1:
+            if (id - 17) in fulls:
+                tehditfulls.append(id - 17)
+            else:
+                ids.append(id - 17)
+
+        if sat != 1 and sat != 2 and süt != 8:
+            if (id - 15) in fulls:
+                tehditfulls.append(id - 15)
+            else:
+                ids.append(id - 15)
+
+        # Sol
+        if süt != 1 and süt != 2 and sat != 1:
+            if (id - 10) in fulls:
+                tehditfulls.append(id - 10)
+            else:
+                ids.append(id - 10)
+
+        if süt != 1 and süt != 2 and sat != 8:
+            if (id + 6) in fulls:
+                tehditfulls.append(id + 6)
+            else:
+                ids.append(id + 6)
+
+        # Sağ
+        if süt != 7 and süt != 8 and sat != 1:
+            if (id - 6) in fulls:
+                tehditfulls.append(id - 6)
+            else:
+                ids.append(id - 6)
+
+        if süt != 7 and süt != 8 and sat != 8:
+            if (id + 10) in fulls:
+                tehditfulls.append(id + 10)
+            else:
+                ids.append(id + 10)
 
         del_dup(ids)
         Choosen.append(square)
@@ -412,8 +525,9 @@ SF = Fil('siyah', True, a2[0], a2[2], 'black', BB)
 BF = Fil('beyaz', True, d5[0], d5[2], 'black', WB)
 SK = Kale('siyah', True, a1[0], a1[2], BR)
 SV = Vezir('beyaz', True, b1[0], b1[2], WQ)
+SA = At('siyah', True, c3[0], c3[2], BKN)
 
-pieces = [SF, BF, SK, SV]
+pieces = [SF, BF, SK, SV, SA]
 
 
 # FUNCTIONS
@@ -459,7 +573,7 @@ B8 = Kareler('empty', 'Empty', b8)
 
 C1 = Kareler('empty', 'Empty', c1)
 C2 = Kareler('empty', 'Empty', c2)
-C3 = Kareler('empty', 'Empty', c3)
+C3 = Kareler('empty', SA, c3)
 C4 = Kareler('empty', 'Empty', c4)
 C5 = Kareler('empty', 'Empty', c5)
 C6 = Kareler('empty', 'Empty', c6)
