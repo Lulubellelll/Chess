@@ -520,14 +520,135 @@ class At(Pieces):
         print(ids, Choosen, fulls)
 
 
+class Şah(Pieces):
+    def __init__(self, color, alive, posx, posy, img, threat):
+        super().__init__(color, alive, posx, posy, img)
+        self.threat = threat
+
+    def press(self, id, square):
+        print(ids)
+
+        sat = (id // 8) + 1
+        süt = (id % 8) + 1
+
+        print('sat: ', sat)
+        print('süt: ', süt)
+
+        for x in kareler:
+            if x.onIt != 'Empty':
+                fulls.append(x.id[4])
+
+        print(fulls)
+
+        # Sağ
+        if süt != 8:
+            if (id + 1) in fulls:
+                tehditfulls.append(id + 1)
+            else:
+                ids.append(id + 1)
+
+        # Sağ Yukarı
+        if süt != 8 and sat != 8:
+            if (id + 9) in fulls:
+                tehditfulls.append(id + 9)
+            else:
+                ids.append(id + 9)
+
+        # Sağ Aşşağı
+        if süt != 8 and sat != 1:
+            if (id - 7) in fulls:
+                tehditfulls.append(id - 7)
+            else:
+                ids.append(id - 7)
+
+        # Sol
+        if süt != 1:
+            if (id + 1) in fulls:
+                tehditfulls.append(id - 1)
+            else:
+                ids.append(id - 1)
+
+        # Sol Yukarı
+        if süt != 1 and sat != 8:
+            if (id + 7) in fulls:
+                tehditfulls.append(id + 7)
+            else:
+                ids.append(id + 7)
+
+        # Sol Aşşağı
+        if süt != 1 and sat != 1:
+            if (id - 9) in fulls:
+                tehditfulls.append(id - 9)
+            else:
+                ids.append(id - 9)
+
+        # Aşşağı
+        if sat != 1:
+            if (id + 1) in fulls:
+                tehditfulls.append(id - 8)
+            else:
+                ids.append(id - 8)
+
+        # Yukarı
+        if sat != 8:
+            if (id + 1) in fulls:
+                tehditfulls.append(id + 8)
+            else:
+                ids.append(id + 8)
+
+        del_dup(ids)
+        Choosen.append(square)
+        print(ids, Choosen, tehditfulls)
+
+        for elements in squares:
+            if elements[4] in ids:
+                elements[5] = True
+            else:
+                pass
+
+        for elements in squares:
+            if elements[4] in tehditfulls:
+                elements[6] = True
+            else:
+                pass
+
+        for elements in squares:
+            if elements[6]:
+                print(elements)
+
+        ids.clear()
+        fulls.clear()
+        tehditfulls.clear()
+
+    def press_again(self):
+        for elements in squares:
+            if elements[5]:
+                elements[5] = False
+            else:
+                pass
+
+        for elements in squares:
+            if elements[6]:
+                elements[6] = False
+            else:
+                pass
+
+        ids.clear()
+        Choosen.clear()
+        tehditfulls.clear()
+        fulls.clear()
+        print(ids, Choosen, fulls)
+
+
 # PIECES
 SF = Fil('siyah', True, a2[0], a2[2], 'black', BB)
 BF = Fil('beyaz', True, d5[0], d5[2], 'black', WB)
 SK = Kale('siyah', True, a1[0], a1[2], BR)
-SV = Vezir('beyaz', True, b1[0], b1[2], WQ)
-SA = At('siyah', True, c3[0], c3[2], BKN)
+BV = Vezir('beyaz', True, b1[0], b1[2], WQ)
+SA = At('siyah', True, c3[0], c3[2], WKN)
+BŞ = Şah('beyaz', True, e1[0], e1[2], WK, False)
 
-pieces = [SF, BF, SK, SV, SA]
+pieces = [SF, BF, SK, BV, SA, BŞ]
 
 
 # FUNCTIONS
@@ -562,7 +683,7 @@ A6 = Kareler('empty', 'Empty', a6)
 A7 = Kareler('empty', 'Empty', a7)
 A8 = Kareler('empty', 'Empty', a8)
 
-B1 = Kareler('empty', SV, b1)
+B1 = Kareler('empty', BV, b1)
 B2 = Kareler('empty', 'Empty', b2)
 B3 = Kareler('empty', 'Empty', b3)
 B4 = Kareler('empty', 'Empty', b4)
@@ -589,7 +710,7 @@ D6 = Kareler('empty', 'Empty', d6)
 D7 = Kareler('empty', 'Empty', d7)
 D8 = Kareler('empty', 'Empty', d8)
 
-E1 = Kareler('empty', 'Empty', e1)
+E1 = Kareler('empty', BŞ, e1)
 E2 = Kareler('empty', 'Empty', e2)
 E3 = Kareler('empty', 'Empty', e3)
 E4 = Kareler('empty', 'Empty', e4)
