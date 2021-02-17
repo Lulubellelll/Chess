@@ -8,7 +8,7 @@ screen = pygame.display.set_mode([980, 980])
 
 # Definitions Out
 reClick = False
-beyazOynar = True
+whitesTurn = True
 
 # Run until the user asks to quit
 running = True
@@ -25,8 +25,8 @@ while running:
 
             for e in kares:
                 # Pick
-                if mx in range(e.sq[0], e.sq[1]) and my in range(e.sq[2], e.sq[3]):
-                    print(beyazOynar, 'bo0')
+                if mx in range(e.sq[0], e.sq[1]) and my in range(e.sq[2], e.sq[3]):   
+                    print(whitesTurn, 'bo0')
 
                     # Eat
                     if e.sq[6] and e.sq[5] == False:
@@ -56,7 +56,7 @@ while running:
                             seçilmiş.change_sit('empty')
                             delChoosen()
                             reClick = not reClick
-                            beyazOynar = not beyazOynar
+                            whitesTurn = not whitesTurn
                         else:
                             print('KENDİ TAŞINI YİYEMEZSİN')
                     # Empty   
@@ -89,11 +89,11 @@ while running:
                             seçilmiş.change_onIt('Empty')
                             seçilmiş.change_sit('empty')
                             reClick = False
-                            beyazOynar = not beyazOynar
+                            whitesTurn = not whitesTurn
                             delChoosen()
                         # Click
                         else:
-                            if beyazOynar == True and e.KARE.onIt.color == 'beyaz' or beyazOynar == False and e.KARE.onIt.color == 'siyah':
+                            if whitesTurn == True and e.KARE.onIt.color == 'beyaz' or whitesTurn == False and e.KARE.onIt.color == 'siyah':
                                 # Reclick
                                 if reClick:
                                     print('YENIDEN TIKLANDI')
@@ -104,7 +104,7 @@ while running:
                                     print('İlk Evre')
                                     e.KARE.onIt.press(e.sq[4], e.KARE)
                                     reClick = not reClick
-                                    print(beyazOynar, 'bo1')
+                                    print(whitesTurn, 'bo1')
                             else:
                                 print('YANLIŞ SIRA')
 

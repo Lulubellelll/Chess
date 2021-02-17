@@ -72,4 +72,13 @@ h6 = [775, 870, 300, 395, 47, False, False]
 h7 = [775, 870, 205, 300, 55, False, False]
 h8 = [775, 870, 110, 205, 63, False, False]
 
-squares = [a1, a2, a3, a4, a5, a6, a7, a8, b1, b2, b3, b4, b5, b6, b7, b8, c1, c2, c3, c4, c5, c6, c7, c8, d1, d2, d3, d4, d5, d6, d7, d8, e1,e2,e3,e4, e5,e6,e7,e8,f1,f2,f3,f4,f5, f6,f7,f8, g1,g2,g3,g4,g5,g6,g7,g8,h1,h2,h3,h4,h5,h6,h7,h8]
+squares = [a1, a2, a3, a4, a5, a6, a7, a8, b1, b2, b3, b4, b5, b6, b7, b8, c1, c2, c3, c4
+    , c5, c6, c7, c8, d1, d2, d3, d4, d5, d6, d7, d8, e1,e2,e3,e4, e5,e6,e7,e8,f1,f2,f3,f4
+    ,f5, f6,f7,f8, g1,g2,g3,g4,g5,g6,g7,g8,h1,h2,h3,h4,h5,h6,h7,h8]
+
+whites = [a1,a3,a5,a7,b2,b4,b6,b8,c1,c3,c5,c7,d2,d4,d6,d8,e1,e3,e5,e7
+    ,f2,f4,f6,f8,g1,g3,g5,g7,h2,h4,h6,h8]
+
+blacks = [a2,a4,a6,a8,b1,b3,b5,b7,c2,c4,c6,c8,d1,d3,d5,d7,e2,e4,e6,e8
+    ,f1,f3,f5,f7,g2,g4,g6,g8,h1,h3,h5,h7]
+
