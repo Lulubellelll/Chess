@@ -1184,30 +1184,31 @@ class Şah(Pieces):
 
         # Aşşağı
         if sat != 1:
-            if (id + 1) in fulls:
+            if (id - 8) in fulls:
                 tehditfulls.append(id - 8)
             else:
                 ids.append(id - 8)
 
         # Yukarı
         if sat != 8:
-            if (id + 1) in fulls:
+            if (id + 8) in fulls:
                 tehditfulls.append(id + 8)
             else:
                 ids.append(id + 8)
 
         del_dup(ids)
         Choosen.append(square)
-        print(ids, Choosen, tehditfulls)
+        print(ids, Choosen, tehditfulls, fulls)
 
         if square.onIt.color == 'beyaz':
             for e in kareler:
                 if e.id[4] in ids and e.id[4] in Stnew:
-                    print(e.onIt)
+                    print(e.id[4], 'Silindi')
                     ids.remove(e.id[4])
         else:
             for e in kareler:
                 if e.id[4] in ids and e.id[4] in Btnew:
+                    print(e.id[4], 'Silindi')
                     ids.remove(e.id[4])
 
         for elements in squares:
@@ -1257,14 +1258,24 @@ class Şah(Pieces):
 
 
 # PIECES
-SF = Fil('siyah', True, a2[0], a2[2], 'black', BB)
-BF = Fil('beyaz', True, d5[0], d5[2], 'black', WB)
-SK = Kale('siyah', True, a1[0], a1[2], BR)
-BV = Vezir('beyaz', True, b1[0], b1[2], WQ)
-SA = At('siyah', True, c3[0], c3[2], WKN)
-BŞ = Şah('beyaz', True, e1[0], e1[2], WK)
+SF1 = Fil('siyah', True, c8[0], c8[2], 'black', BB)
+SF2 = Fil('siyah', True, f8[0], f8[2], 'white', BB)
+BF1 = Fil('beyaz', True, c1[0], c1[2], 'white', WB)
+BF2 = Fil('beyaz', True, f1[0], f1[2], 'black', WB)
+SK1 = Kale('siyah', True, a8[0], a8[2], BR)
+SK2 = Kale('siyah', True, h8[0], h8[2], BR)
+BK1 = Kale('beyaz', True, a1[0], a1[2], WR)
+BK2 = Kale('beyaz', True, h1[0], h1[2], WR)
+BV = Vezir('beyaz', True, d1[0], d1[2], WQ)
+SV = Vezir('siyah', True, d8[0], d8[2], BQ)
+SA1 = At('siyah', True, b8[0], b8[2], BKN)
+SA2 = At('siyah', True, g8[0], g8[2], BKN)
+BA1 = At('beyaz', True, g1[0], g1[2], WKN)
+BA2 = At('beyaz', True, b1[0], b1[2], WKN)
+BS = Şah('beyaz', True, e1[0], e1[2], WK)
+SS = Şah('siyah', True, e8[0], e8[2], BK)
 
-pieces = [SF, BF, SK, BV, SA, BŞ]
+pieces = [SF1, SF2, BF1, BF2, SK1, SK2, BV, SA1, SA2, SS, BK1, BK2, BA1, BA2, BS, SV]
 
 
 # FUNCTIONS
@@ -1290,77 +1301,77 @@ class Kareler(object):
         self.situation = situation
 
 
-A1 = Kareler('full', SK, a1)
-A2 = Kareler('empty', SF, a2)
+A1 = Kareler('full', BK1, a1)
+A2 = Kareler('empty', 'Empty', a2)
 A3 = Kareler('empty', 'Empty', a3)
 A4 = Kareler('empty', 'Empty', a4)
 A5 = Kareler('empty', 'Empty', a5)
 A6 = Kareler('empty', 'Empty', a6)
 A7 = Kareler('empty', 'Empty', a7)
-A8 = Kareler('empty', 'Empty', a8)
+A8 = Kareler('empty', SK1, a8)
 
-B1 = Kareler('empty', BV, b1)
+B1 = Kareler('empty', BA2, b1)
 B2 = Kareler('empty', 'Empty', b2)
 B3 = Kareler('empty', 'Empty', b3)
 B4 = Kareler('empty', 'Empty', b4)
 B5 = Kareler('empty', 'Empty', b5)
 B6 = Kareler('empty', 'Empty', b6)
 B7 = Kareler('empty', 'Empty', b7)
-B8 = Kareler('empty', 'Empty', b8)
+B8 = Kareler('empty', SA1, b8)
 
-C1 = Kareler('empty', 'Empty', c1)
+C1 = Kareler('empty', BF1, c1)
 C2 = Kareler('empty', 'Empty', c2)
-C3 = Kareler('empty', SA, c3)
+C3 = Kareler('empty', 'Empty', c3)
 C4 = Kareler('empty', 'Empty', c4)
 C5 = Kareler('empty', 'Empty', c5)
 C6 = Kareler('empty', 'Empty', c6)
 C7 = Kareler('empty', 'Empty', c7)
-C8 = Kareler('empty', 'Empty', c8)
+C8 = Kareler('empty', SF1, c8)
 
-D1 = Kareler('empty', 'Empty', d1)
+D1 = Kareler('empty', BV, d1)
 D2 = Kareler('empty', 'Empty', d2)
 D3 = Kareler('empty', 'Empty', d3)
 D4 = Kareler('empty', 'Empty', d4)
-D5 = Kareler('empty', BF, d5)
+D5 = Kareler('empty', 'Empty', d5)
 D6 = Kareler('empty', 'Empty', d6)
 D7 = Kareler('empty', 'Empty', d7)
-D8 = Kareler('empty', 'Empty', d8)
+D8 = Kareler('empty', SV, d8)
 
-E1 = Kareler('empty', BŞ, e1)
+E1 = Kareler('empty', BS, e1)
 E2 = Kareler('empty', 'Empty', e2)
 E3 = Kareler('empty', 'Empty', e3)
 E4 = Kareler('empty', 'Empty', e4)
 E5 = Kareler('empty', 'Empty', e5)
 E6 = Kareler('empty', 'Empty', e6)
 E7 = Kareler('empty', 'Empty', e7)
-E8 = Kareler('empty', 'Empty', e8)
+E8 = Kareler('empty', SS, e8)
 
-F1 = Kareler('empty', 'Empty', f1)
+F1 = Kareler('empty', BF2, f1)
 F2 = Kareler('empty', 'Empty', f2)
 F3 = Kareler('empty', 'Empty', f3)
 F4 = Kareler('empty', 'Empty', f4)
 F5 = Kareler('empty', 'Empty', f5)
 F6 = Kareler('empty', 'Empty', f6)
 F7 = Kareler('empty', 'Empty', f7)
-F8 = Kareler('empty', 'Empty', f8)
+F8 = Kareler('empty', SF2, f8)
 
-G1 = Kareler('empty', 'Empty', g1)
+G1 = Kareler('empty', BA1, g1)
 G2 = Kareler('empty', 'Empty', g2)
 G3 = Kareler('empty', 'Empty', g3)
 G4 = Kareler('empty', 'Empty', g4)
 G5 = Kareler('empty', 'Empty', g5)
 G6 = Kareler('empty', 'Empty', g6)
 G7 = Kareler('empty', 'Empty', g7)
-G8 = Kareler('empty', 'Empty', g8)
+G8 = Kareler('empty', SA2, g8)
 
-H1 = Kareler('empty', 'Empty', h1)
+H1 = Kareler('empty', BK2, h1)
 H2 = Kareler('empty', 'Empty', h2)
 H3 = Kareler('empty', 'Empty', h3)
 H4 = Kareler('empty', 'Empty', h4)
 H5 = Kareler('empty', 'Empty', h5)
 H6 = Kareler('empty', 'Empty', h6)
 H7 = Kareler('empty', 'Empty', h7)
-H8 = Kareler('empty', 'Empty', h8)
+H8 = Kareler('empty', SK2, h8)
 
 kareler = [A1, A2, A3, A4, A5, A6, A7, A8, B1, B2, B3, B4, B5, B6, B7, B8, C1, C2, C3, C4, C5, C6, C7, C8, D1, D2, D3,
            D4, D5, D6, D7, D8, E1, E2, E3, E4, E5, E6, E7, E8, F1, F2, F3, F4, F5, F6, F7, F8, G1, G2, G3, G4, G5, G6,

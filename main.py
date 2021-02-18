@@ -9,6 +9,7 @@ screen = pygame.display.set_mode([980, 980])
 # Definitions Out
 reClick = False
 whitesTurn = True
+mahmut = False
 
 # Run until the user asks to quit
 running = True
@@ -20,16 +21,21 @@ while running:
     # Events
     for event in pygame.event.get():
 
+        if mx in range(d4[0], d4[1]) and my in range(d4[2], d4[3]):  # YANMA SÖNME DENEMESİ
+            mahmut = True
+        else:
+            mahmut = False
+
         if event.type == pygame.MOUSEBUTTONDOWN:
             print(mx, my)
 
             for e in kares:
                 # Pick
-                if mx in range(e.sq[0], e.sq[1]) and my in range(e.sq[2], e.sq[3]):   
+                if mx in range(e.sq[0], e.sq[1]) and my in range(e.sq[2], e.sq[3]):
                     print(whitesTurn, 'bo0')
 
                     # Eat
-                    if e.sq[6] and e.sq[5] == False:
+                    if e.sq[6] and e.sq[5] == False and e.KARE.onIt != 'Empty':
                         print('eat')
                         if Choosen[0].onIt.color != e.KARE.onIt.color:
                             e.KARE.onIt.death()
@@ -112,7 +118,7 @@ while running:
             running = False
 
     # Draw
-    img = pygame.image.load('Chess.png')
+    img = pygame.image.load('chessTable.png')
     screen.blit(img, (0, 0))
 
     # Pieces
@@ -120,12 +126,15 @@ while running:
         if e.alive:
             screen.blit(e.img, (e.posx, e.posy))
 
+    if mahmut:
+        screen.blit(BB, (d4[0], d4[2]))  # Bu yanma sönme denemesi
+
     # İşaretler
-    işaret = pygame.image.load('işaret.png')
+    sign = pygame.image.load('65yi.png')
 
     for e in squares:
         if e[5]:
-            screen.blit(işaret, (e[0], e[2]))
+            screen.blit(sign, (e[0], e[2]))
 
     # Flip the display
     pygame.display.flip()

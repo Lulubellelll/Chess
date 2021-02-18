@@ -1,9 +1,13 @@
 import pygame
 
-BB = pygame.image.load('üçgen.png')
-WB = pygame.image.load('photo.jpeg')
-BR = pygame.image.load('kale.png')
-WQ = pygame.image.load('vezir.png')
-WKN = pygame.image.load('at.png')
-WK = pygame.image.load('şah.png')
+BB = pygame.image.load('siyahFil.png')
+WB = pygame.image.load('beyazFil.png')
+WR = pygame.image.load('beyazKale.png')
+BR = pygame.image.load('siyahKale.png')
+BQ = pygame.image.load('siyahVezir.png')
+WQ = pygame.image.load('beyazVezir.png')
+BKN = pygame.image.load('siyahAt.png')
+WKN = pygame.image.load('beyazAt.png')
+BK = pygame.image.load('siyahŞah.png')
+WK = pygame.image.load('beyazŞah.png')
 
