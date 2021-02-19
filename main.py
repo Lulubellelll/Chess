@@ -118,7 +118,7 @@ while running:
             running = False
 
     # Draw
-    img = pygame.image.load('chessTable.png')
+    img = pygame.image.load('images/chessTable.png')
     screen.blit(img, (0, 0))
 
     # Pieces
@@ -127,8 +127,8 @@ while running:
             screen.blit(e.img, (e.posx, e.posy))
 
     # İşaretler
-    sign = pygame.image.load('50yi.png')
-    bsign = pygame.image.load('50i.png')
+    sign = pygame.image.load('images/50yi.png')
+    bsign = pygame.image.load('images/50i.png')
 
     for e in squares:
         if e[5]:
