@@ -94,9 +94,42 @@ while running:
                             seçilmiş.onIt.posy = e.sq[2]
                             seçilmiş.change_onIt('Empty')
                             seçilmiş.change_sit('empty')
-                            reClick = False
-                            whitesTurn = not whitesTurn
-                            delChoosen()
+
+                            defthreats()
+                            if whitesTurn:
+                                for x in kareler:
+                                    if x.onIt == BS:
+                                        if x.id[4] in Stnew:
+                                            BS.true_thr()
+                                            print(BS.threatened)
+                                        else:
+                                            BS.false_thr()
+                                            print(BS.threatened)
+                            else:
+                                for x in kareler:
+                                    if x.onIt == SS:
+                                        if x.id[4] in Btnew:
+                                            SS.true_thr()
+                                            print(SS.threatened)
+                                        else:
+                                            SS.false_thr()
+                                            print(SS.threatened)
+
+                            if whitesTurn and BS.threatened:
+                                seçilmiş.change_onIt(e.KARE.onIt)
+                                seçilmiş.change_sit(e.KARE.situation)
+                                e.KARE.onIt.posx = seçilmiş.id[0]
+                                e.KARE.onIt.posy = seçilmiş.id[2]
+                                e.KARE.change_onIt('Empty')
+                                e.KARE.change_sit('empty')
+                                reClick = False
+                            else:
+                                reClick = False
+                                whitesTurn = not whitesTurn
+                                delChoosen()
+
+
+
                         # Click
                         else:
                             if whitesTurn == True and e.KARE.onIt.color == 'beyaz' or whitesTurn == False and e.KARE.onIt.color == 'siyah':

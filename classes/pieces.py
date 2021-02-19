@@ -31,7 +31,6 @@ class Kale(Pieces):
         super().__init__(color, alive, posx, posy, img)
 
     def threat(self, id, square):
-        print(ids)
 
         sat = (id // 8) + 1
         süt = (id % 8) + 1
@@ -43,7 +42,10 @@ class Kale(Pieces):
         # Sağ
         for i in range(1, 9 - süt):
             if (id + 1 * i) in fulls:
-                tehditfulls.append(id + 1 * i)
+                if square.onIt.color == 'beyaz':
+                    Bthreats.append(id + 1 * i)
+                else:
+                    Sthreats.append(id + 1 * i)
                 break
             else:
                 if square.onIt.color == 'beyaz':
@@ -51,11 +53,13 @@ class Kale(Pieces):
                 else:
                     Sthreats.append(id + 1 * i)
 
-
         # Sol
         for i in range(1, süt):
             if (id - 1 * i) in fulls:
-                tehditfulls.append(id - 1 * i)
+                if square.onIt.color == 'beyaz':
+                    Bthreats.append(id - 1 * i)
+                else:
+                    Sthreats.append(id - 1 * i)
                 break
             else:
                 if square.onIt.color == 'beyaz':
@@ -66,7 +70,10 @@ class Kale(Pieces):
         # Aşşağı
         for i in range(1, sat):
             if (id - 8 * i) in fulls:
-                tehditfulls.append(id - 8 * i)
+                if square.onIt.color == 'beyaz':
+                    Bthreats.append(id - 8 * i)
+                else:
+                    Sthreats.append(id - 8 * i)
                 break
             else:
                 if square.onIt.color == 'beyaz':
@@ -77,7 +84,10 @@ class Kale(Pieces):
         # Yukarı
         for i in range(1, 9 - sat):
             if (id + 8 * i) in fulls:
-                tehditfulls.append(id + 8 * i)
+                if square.onIt.color == 'beyaz':
+                    Bthreats.append(id + 8 * i)
+                else:
+                    Sthreats.append(id + 8 * i)
                 break
             else:
                 if square.onIt.color == 'beyaz':
@@ -85,27 +95,7 @@ class Kale(Pieces):
                 else:
                     Sthreats.append(id + 8 * i)
 
-        del_dup(threats)
-        print(threats, Choosen, tehditfulls)
-
-        for elements in squares:
-            if elements[4] in ids:
-                elements[5] = True
-            else:
-                pass
-
-        for elements in squares:
-            if elements[4] in tehditfulls:
-                elements[6] = True
-            else:
-                pass
-
-        for elements in squares:
-            if elements[6]:
-                print(elements)
-
         fulls.clear()
-        tehditfulls.clear()
 
     def press(self, id, square):
         print(ids)
@@ -175,6 +165,10 @@ class Kale(Pieces):
                 print(elements)
 
         ids.clear()
+        Sthreats.clear()
+        Btnew.clear()
+        Bthreats.clear()
+        Stnew.clear()
         fulls.clear()
         tehditfulls.clear()
 
@@ -216,7 +210,10 @@ class Fil(Pieces):
         if sat >= süt:
             for i in range(1, 9 - sat):
                 if (id + 9 * i) in fulls:
-                    tehditfulls.append(id + 9 * i)
+                    if square.onIt.color == 'beyaz':
+                        Bthreats.append(id + 9 * i)
+                    else:
+                        Sthreats.append(id + 9 * i)
                     break
                 else:
                     if square.onIt.color == 'beyaz':
@@ -227,7 +224,10 @@ class Fil(Pieces):
         else:
             for i in range(1, (8 - süt) + 1):
                 if (id + 9 * i) in fulls:
-                    tehditfulls.append(id + 9 * i)
+                    if square.onIt.color == 'beyaz':
+                        Bthreats.append(id + 9 * i)
+                    else:
+                        Sthreats.append(id + 9 * i)
                     break
                 else:
                     if square.onIt.color == 'beyaz':
@@ -239,7 +239,10 @@ class Fil(Pieces):
         if sat >= süt:
             for i in range(1, süt):
                 if (id - 9 * i) in fulls:
-                    tehditfulls.append(id - 9 * i)
+                    if square.onIt.color == 'beyaz':
+                        Bthreats.append(id - 9 * i)
+                    else:
+                        Sthreats.append(id - 9 * i)
                     break
                 else:
                     if square.onIt.color == 'beyaz':
@@ -249,7 +252,10 @@ class Fil(Pieces):
         else:
             for i in range(1, sat):
                 if (id - 9 * i) in fulls:
-                    tehditfulls.append(id - 9 * i)
+                    if square.onIt.color == 'beyaz':
+                        Bthreats.append(id - 9 * i)
+                    else:
+                        Sthreats.append(id - 9 * i)
                     break
                 else:
                     if square.onIt.color == 'beyaz':
@@ -261,7 +267,10 @@ class Fil(Pieces):
         if sat + süt >= 9:
             for i in range(1, (8 - sat) + 1):
                 if (id + 7 * i) in fulls:
-                    tehditfulls.append(id + 7 * i)
+                    if square.onIt.color == 'beyaz':
+                        Bthreats.append(id + 7 * i)
+                    else:
+                        Sthreats.append(id + 7 * i)
                     break
                 else:
                     if square.onIt.color == 'beyaz':
@@ -271,7 +280,10 @@ class Fil(Pieces):
         else:
             for i in range(1, süt):
                 if (id + 7 * i) in fulls:
-                    tehditfulls.append(id + 7 * i)
+                    if square.onIt.color == 'beyaz':
+                        Bthreats.append(id + 7 * i)
+                    else:
+                        Sthreats.append(id + 7 * i)
                     break
                 else:
                     if square.onIt.color == 'beyaz':
@@ -283,7 +295,10 @@ class Fil(Pieces):
         if sat + süt >= 9:
             for i in range(1, 9 - süt):
                 if (id - 7 * i) in fulls:
-                    tehditfulls.append(id - 7 * i)
+                    if square.onIt.color == 'beyaz':
+                        Bthreats.append(id - 7 * i)
+                    else:
+                        Sthreats.append(id - 7 * i)
                     break
                 else:
                     if square.onIt.color == 'beyaz':
@@ -294,7 +309,10 @@ class Fil(Pieces):
         else:
             for i in range(1, sat):
                 if (id - 7 * i) in fulls:
-                    tehditfulls.append(id - 7 * i)
+                    if square.onIt.color == 'beyaz':
+                        Bthreats.append(id - 7 * i)
+                    else:
+                        Sthreats.append(id - 7 * i)
                     break
                 else:
                     if square.onIt.color == 'beyaz':
@@ -302,27 +320,7 @@ class Fil(Pieces):
                     else:
                         Sthreats.append(id - 7 * i)
 
-        del_dup(threats)
-        print(threats, Choosen, tehditfulls)
-
-        for elements in squares:
-            if elements[4] in ids:
-                elements[5] = True
-            else:
-                pass
-
-        for elements in squares:
-            if elements[4] in tehditfulls:
-                elements[6] = True
-            else:
-                pass
-
-        for elements in squares:
-            if elements[6]:
-                print(elements)
-
         fulls.clear()
-        tehditfulls.clear()
 
     def press(self, id, square):
         print(ids)
@@ -426,6 +424,10 @@ class Fil(Pieces):
                 print(elements)
 
         ids.clear()
+        Sthreats.clear()
+        Btnew.clear()
+        Bthreats.clear()
+        Stnew.clear()
         fulls.clear()
         tehditfulls.clear()
 
@@ -466,7 +468,10 @@ class Vezir(Pieces):
         if sat >= süt:
             for i in range(1, 9 - sat):
                 if (id + 9 * i) in fulls:
-                    tehditfulls.append(id + 9 * i)
+                    if square.onIt.color == 'beyaz':
+                        Bthreats.append(id + 9 * i)
+                    else:
+                        Sthreats.append(id + 9 * i)
                     break
                 else:
                     if square.onIt.color == 'beyaz':
@@ -476,7 +481,10 @@ class Vezir(Pieces):
         else:
             for i in range(1, (8 - süt) + 1):
                 if (id + 9 * i) in fulls:
-                    tehditfulls.append(id + 9 * i)
+                    if square.onIt.color == 'beyaz':
+                        Bthreats.append(id + 9 * i)
+                    else:
+                        Sthreats.append(id + 9 * i)
                     break
                 else:
                     if square.onIt.color == 'beyaz':
@@ -488,7 +496,10 @@ class Vezir(Pieces):
         if sat >= süt:
             for i in range(1, süt):
                 if (id - 9 * i) in fulls:
-                    tehditfulls.append(id - 9 * i)
+                    if square.onIt.color == 'beyaz':
+                        Bthreats.append(id - 9 * i)
+                    else:
+                        Sthreats.append(id - 9 * i)
                     break
                 else:
                     if square.onIt.color == 'beyaz':
@@ -498,7 +509,10 @@ class Vezir(Pieces):
         else:
             for i in range(1, sat):
                 if (id - 9 * i) in fulls:
-                    tehditfulls.append(id - 9 * i)
+                    if square.onIt.color == 'beyaz':
+                        Bthreats.append(id - 9 * i)
+                    else:
+                        Sthreats.append(id - 9 * i)
                     break
                 else:
                     if square.onIt.color == 'beyaz':
@@ -510,7 +524,10 @@ class Vezir(Pieces):
         if sat + süt >= 9:
             for i in range(1, (8 - sat) + 1):
                 if (id + 7 * i) in fulls:
-                    tehditfulls.append(id + 7 * i)
+                    if square.onIt.color == 'beyaz':
+                        Bthreats.append(id + 7 * i)
+                    else:
+                        Sthreats.append(id + 7 * i)
                     break
                 else:
                     if square.onIt.color == 'beyaz':
@@ -520,7 +537,10 @@ class Vezir(Pieces):
         else:
             for i in range(1, süt):
                 if (id + 7 * i) in fulls:
-                    tehditfulls.append(id + 7 * i)
+                    if square.onIt.color == 'beyaz':
+                        Bthreats.append(id + 7 * i)
+                    else:
+                        Sthreats.append(id + 7 * i)
                     break
                 else:
                     if square.onIt.color == 'beyaz':
@@ -532,7 +552,10 @@ class Vezir(Pieces):
         if sat + süt >= 9:
             for i in range(1, 9 - süt):
                 if (id - 7 * i) in fulls:
-                    tehditfulls.append(id - 7 * i)
+                    if square.onIt.color == 'beyaz':
+                        Bthreats.append(id - 7 * i)
+                    else:
+                        Sthreats.append(id - 7 * i)
                     break
                 else:
                     if square.onIt.color == 'beyaz':
@@ -542,7 +565,10 @@ class Vezir(Pieces):
         else:
             for i in range(1, sat):
                 if (id - 7 * i) in fulls:
-                    tehditfulls.append(id - 7 * i)
+                    if square.onIt.color == 'beyaz':
+                        Bthreats.append(id - 7 * i)
+                    else:
+                        Sthreats.append(id - 7 * i)
                     break
                 else:
                     if square.onIt.color == 'beyaz':
@@ -553,7 +579,10 @@ class Vezir(Pieces):
         # Sağ
         for i in range(1, 9 - süt):
             if (id + 1 * i) in fulls:
-                tehditfulls.append(id + 1 * i)
+                if square.onIt.color == 'beyaz':
+                    Bthreats.append(id + 1 * i)
+                else:
+                    Sthreats.append(id + 1 * i)
                 break
             else:
                 if square.onIt.color == 'beyaz':
@@ -564,7 +593,10 @@ class Vezir(Pieces):
         # Sol
         for i in range(1, süt):
             if (id - 1 * i) in fulls:
-                tehditfulls.append(id - 1 * i)
+                if square.onIt.color == 'beyaz':
+                    Bthreats.append(id - 1 * i)
+                else:
+                    Sthreats.append(id - 1 * i)
                 break
             else:
                 if square.onIt.color == 'beyaz':
@@ -575,7 +607,10 @@ class Vezir(Pieces):
         # Aşşağı
         for i in range(1, sat):
             if (id - 8 * i) in fulls:
-                tehditfulls.append(id - 8 * i)
+                if square.onIt.color == 'beyaz':
+                    Bthreats.append(id - 8 * i)
+                else:
+                    Sthreats.append(id - 8 * i)
                 break
             else:
                 if square.onIt.color == 'beyaz':
@@ -586,7 +621,10 @@ class Vezir(Pieces):
         # Yukarı
         for i in range(1, 9 - sat):
             if (id + 8 * i) in fulls:
-                tehditfulls.append(id + 8 * i)
+                if square.onIt.color == 'beyaz':
+                    Bthreats.append(id + 8 * i)
+                else:
+                    Sthreats.append(id + 8 * i)
                 break
             else:
                 if square.onIt.color == 'beyaz':
@@ -594,27 +632,7 @@ class Vezir(Pieces):
                 else:
                     Sthreats.append(id + 8 * i)
 
-        del_dup(threats)
-        print(threats, Choosen, tehditfulls)
-
-        for elements in squares:
-            if elements[4] in ids:
-                elements[5] = True
-            else:
-                pass
-
-        for elements in squares:
-            if elements[4] in tehditfulls:
-                elements[6] = True
-            else:
-                pass
-
-        for elements in squares:
-            if elements[6]:
-                print(elements)
-
         fulls.clear()
-        tehditfulls.clear()
 
     def press(self, id, square):
         print(ids)
@@ -748,6 +766,10 @@ class Vezir(Pieces):
                 print(elements)
 
         ids.clear()
+        Sthreats.clear()
+        Btnew.clear()
+        Bthreats.clear()
+        Stnew.clear()
         fulls.clear()
         tehditfulls.clear()
 
@@ -787,7 +809,10 @@ class At(Pieces):
         # Yukarı
         if sat != 7 and sat != 8 and süt != 8:
             if (id + 17) in fulls:
-                tehditfulls.append(id + 17)
+                if square.onIt.color == 'beyaz':
+                    Bthreats.append(id + 17)
+                else:
+                    Sthreats.append(id + 17)
             else:
                 if square.onIt.color == 'beyaz':
                     Bthreats.append(id + 17)
@@ -796,7 +821,10 @@ class At(Pieces):
 
         if sat != 7 and sat != 8 and süt != 1:
             if (id + 15) in fulls:
-                tehditfulls.append(id + 15)
+                if square.onIt.color == 'beyaz':
+                    Bthreats.append(id + 15)
+                else:
+                    Sthreats.append(id + 15)
             else:
                 if square.onIt.color == 'beyaz':
                     Bthreats.append(id + 15)
@@ -806,7 +834,11 @@ class At(Pieces):
         # Aşşağı
         if sat != 1 and sat != 2 and süt != 1:
             if (id - 17) in fulls:
-                tehditfulls.append(id - 17)
+                if square.onIt.color == 'beyaz':
+                    Bthreats.append(id - 17)
+                else:
+                    Sthreats.append(id - 17)
+                pass
             else:
                 if square.onIt.color == 'beyaz':
                     Bthreats.append(id - 17)
@@ -815,7 +847,10 @@ class At(Pieces):
 
         if sat != 1 and sat != 2 and süt != 8:
             if (id - 15) in fulls:
-                tehditfulls.append(id - 15)
+                if square.onIt.color == 'beyaz':
+                    Bthreats.append(id - 15)
+                else:
+                    Sthreats.append(id - 15)
             else:
                 if square.onIt.color == 'beyaz':
                     Bthreats.append(id - 15)
@@ -825,7 +860,11 @@ class At(Pieces):
         # Sol
         if süt != 1 and süt != 2 and sat != 1:
             if (id - 10) in fulls:
-                tehditfulls.append(id - 10)
+                if square.onIt.color == 'beyaz':
+                    Bthreats.append(id - 10)
+                else:
+                    Sthreats.append(id - 10)
+                pass
             else:
                 if square.onIt.color == 'beyaz':
                     Bthreats.append(id - 10)
@@ -834,7 +873,10 @@ class At(Pieces):
 
         if süt != 1 and süt != 2 and sat != 8:
             if (id + 6) in fulls:
-                tehditfulls.append(id + 6)
+                if square.onIt.color == 'beyaz':
+                    Bthreats.append(id + 6)
+                else:
+                    Sthreats.append(id + 6)
             else:
                 if square.onIt.color == 'beyaz':
                     Bthreats.append(id + 6)
@@ -844,7 +886,10 @@ class At(Pieces):
         # Sağ
         if süt != 7 and süt != 8 and sat != 1:
             if (id - 6) in fulls:
-                tehditfulls.append(id - 6)
+                if square.onIt.color == 'beyaz':
+                    Bthreats.append(id - 6)
+                else:
+                    Sthreats.append(id - 6)
             else:
                 if square.onIt.color == 'beyaz':
                     Bthreats.append(id - 6)
@@ -853,34 +898,17 @@ class At(Pieces):
 
         if süt != 7 and süt != 8 and sat != 8:
             if (id + 10) in fulls:
-                tehditfulls.append(id + 10)
+                if square.onIt.color == 'beyaz':
+                    Bthreats.append(id + 10)
+                else:
+                    Sthreats.append(id + 10)
             else:
                 if square.onIt.color == 'beyaz':
                     Bthreats.append(id + 10)
                 else:
                     Sthreats.append(id + 10)
 
-        del_dup(threats)
-        print(threats, Choosen, tehditfulls)
-
-        for elements in squares:
-            if elements[4] in ids:
-                elements[5] = True
-            else:
-                pass
-
-        for elements in squares:
-            if elements[4] in tehditfulls:
-                elements[6] = True
-            else:
-                pass
-
-        for elements in squares:
-            if elements[6]:
-                print(elements)
-
         fulls.clear()
-        tehditfulls.clear()
 
     def press(self, id, square):
         print(ids)
@@ -970,6 +998,10 @@ class At(Pieces):
                 print(elements)
 
         ids.clear()
+        Sthreats.clear()
+        Btnew.clear()
+        Bthreats.clear()
+        Stnew.clear()
         fulls.clear()
         tehditfulls.clear()
 
@@ -994,8 +1026,15 @@ class At(Pieces):
 
 
 class Şah(Pieces):
-    def __init__(self, color, alive, posx, posy, img):
+    def __init__(self, color, alive, posx, posy, img, threatened):
         super().__init__(color, alive, posx, posy, img)
+        self.threatened = threatened
+
+    def true_thr(self):
+        self.threatened = True
+
+    def false_thr(self):
+        self.threatened = False
 
     def threat(self, id, square):
 
@@ -1009,7 +1048,10 @@ class Şah(Pieces):
         # Sağ
         if süt != 8:
             if (id + 1) in fulls:
-                tehditfulls.append(id + 1)
+                if square.onIt.color == 'beyaz':
+                    Bthreats.append(id + 1)
+                else:
+                    Sthreats.append(id + 1)
             else:
                 if square.onIt.color == 'beyaz':
                     Bthreats.append(id + 1)
@@ -1019,7 +1061,10 @@ class Şah(Pieces):
         # Sağ Yukarı
         if süt != 8 and sat != 8:
             if (id + 9) in fulls:
-                tehditfulls.append(id + 9)
+                if square.onIt.color == 'beyaz':
+                    Bthreats.append(id + 9)
+                else:
+                    Sthreats.append(id + 9)
             else:
                 if square.onIt.color == 'beyaz':
                     Bthreats.append(id + 9)
@@ -1029,7 +1074,10 @@ class Şah(Pieces):
         # Sağ Aşşağı
         if süt != 8 and sat != 1:
             if (id - 7) in fulls:
-                tehditfulls.append(id - 7)
+                if square.onIt.color == 'beyaz':
+                    Bthreats.append(id - 7)
+                else:
+                    Sthreats.append(id - 7)
             else:
                 if square.onIt.color == 'beyaz':
                     Bthreats.append(id - 7)
@@ -1039,7 +1087,10 @@ class Şah(Pieces):
         # Sol
         if süt != 1:
             if (id + 1) in fulls:
-                tehditfulls.append(id - 1)
+                if square.onIt.color == 'beyaz':
+                    Bthreats.append(id - 1)
+                else:
+                    Sthreats.append(id - 1)
             else:
                 if square.onIt.color == 'beyaz':
                     Bthreats.append(id - 1)
@@ -1049,7 +1100,10 @@ class Şah(Pieces):
         # Sol Yukarı
         if süt != 1 and sat != 8:
             if (id + 7) in fulls:
-                tehditfulls.append(id + 7)
+                if square.onIt.color == 'beyaz':
+                    Bthreats.append(id + 7)
+                else:
+                    Sthreats.append(id + 7)
             else:
                 if square.onIt.color == 'beyaz':
                     Bthreats.append(id + 7)
@@ -1059,7 +1113,10 @@ class Şah(Pieces):
         # Sol Aşşağı
         if süt != 1 and sat != 1:
             if (id - 9) in fulls:
-                tehditfulls.append(id - 9)
+                if square.onIt.color == 'beyaz':
+                    Bthreats.append(id - 9)
+                else:
+                    Sthreats.append(id - 9)
             else:
                 if square.onIt.color == 'beyaz':
                     Bthreats.append(id - 9)
@@ -1068,8 +1125,11 @@ class Şah(Pieces):
 
         # Aşşağı
         if sat != 1:
-            if (id + 1) in fulls:
-                tehditfulls.append(id - 8)
+            if (id - 8) in fulls:
+                if square.onIt.color == 'beyaz':
+                    Bthreats.append(id - 8)
+                else:
+                    Sthreats.append(id - 8)
             else:
                 if square.onIt.color == 'beyaz':
                     Bthreats.append(id - 8)
@@ -1078,63 +1138,23 @@ class Şah(Pieces):
 
         # Yukarı
         if sat != 8:
-            if (id + 1) in fulls:
-                tehditfulls.append(id + 8)
+            if (id + 8) in fulls:
+                pass
             else:
                 if square.onIt.color == 'beyaz':
                     Bthreats.append(id + 8)
                 else:
                     Sthreats.append(id + 8)
 
-        del_dup(threats)
-        print(threats, Choosen, tehditfulls)
-
-        for elements in squares:
-            if elements[4] in ids:
-                elements[5] = True
-            else:
-                pass
-
-        for elements in squares:
-            if elements[4] in tehditfulls:
-                elements[6] = True
-            else:
-                pass
-
-        for elements in squares:
-            if elements[6]:
-                print(elements)
-
         fulls.clear()
-        tehditfulls.clear()
 
     def press(self, id, square):
-
-        global Sthreats
-        global Bthreats
 
         sat = (id // 8) + 1
         süt = (id % 8) + 1
 
-        for x in kareler:
-            if x.onIt == 'Empty':
-                pass
-            else:
-                x.onIt.threat(x.id[4], x)
+        defthreats()
 
-        for i in Sthreats:
-            if i not in Stnew:
-                Stnew.append(i)
-
-        for i in Bthreats:
-            if i not in Btnew:
-                Btnew.append(i)
-
-        Sthreats = Stnew
-        print('Sthreats:', Stnew)
-
-        Bthreats = Btnew
-        print('Bthreats:', Btnew)
 
         for x in kareler:
             if x.onIt != 'Empty':
@@ -1203,12 +1223,10 @@ class Şah(Pieces):
         if square.onIt.color == 'beyaz':
             for e in kareler:
                 if e.id[4] in ids and e.id[4] in Stnew:
-                    print(e.id[4], 'Silindi')
                     ids.remove(e.id[4])
         else:
             for e in kareler:
                 if e.id[4] in ids and e.id[4] in Btnew:
-                    print(e.id[4], 'Silindi')
                     ids.remove(e.id[4])
 
         for elements in squares:
@@ -1222,12 +1240,6 @@ class Şah(Pieces):
                 elements[6] = True
             else:
                 pass
-
-        for elements in squares:
-            if elements[6]:
-                print(elements)
-
-        square.id[6] = False  # Bu keninin anlık olarak tehdit edildiğini gösteriyor Şah çekme mekaniğinde kullnacağız
 
         ids.clear()
         Sthreats.clear()
@@ -1272,8 +1284,8 @@ SA1 = At('siyah', True, b8[0], b8[2], BKN)
 SA2 = At('siyah', True, g8[0], g8[2], BKN)
 BA1 = At('beyaz', True, g1[0], g1[2], WKN)
 BA2 = At('beyaz', True, b1[0], b1[2], WKN)
-BS = Şah('beyaz', True, e1[0], e1[2], WK)
-SS = Şah('siyah', True, e8[0], e8[2], BK)
+BS = Şah('beyaz', True, e1[0], e1[2], WK, False)
+SS = Şah('siyah', True, e8[0], e8[2], BK, False)
 
 pieces = [SF1, SF2, BF1, BF2, SK1, SK2, BV, SA1, SA2, SS, BK1, BK2, BA1, BA2, BS, SV]
 
@@ -1285,6 +1297,33 @@ def delChoosen():
 
 def del_dup(test_list):
     return list(dict.fromkeys(test_list))
+
+
+def defthreats():
+    global Sthreats
+    global Bthreats
+
+    for x in kareler:
+        if x.onIt == 'Empty':
+            pass
+        else:
+            x.onIt.threat(x.id[4], x)
+
+    for i in Sthreats:
+        if i not in Stnew:
+            Stnew.append(i)
+
+    for i in Bthreats:
+        if i not in Btnew:
+            Btnew.append(i)
+
+    Sthreats = Stnew
+    print('Stnew:', Stnew)
+
+    Bthreats = Btnew
+    print('Btnew:', Btnew)
+
+
 
 
 # SQUARES
@@ -1301,7 +1340,7 @@ class Kareler(object):
         self.situation = situation
 
 
-A1 = Kareler('full', BK1, a1)
+A1 = Kareler('empty', BK1, a1)
 A2 = Kareler('empty', 'Empty', a2)
 A3 = Kareler('empty', 'Empty', a3)
 A4 = Kareler('empty', 'Empty', a4)
