@@ -9,7 +9,6 @@ screen = pygame.display.set_mode([980, 980])
 # Definitions Out
 reClick = False
 whitesTurn = True
-mahmut = False
 
 # Run until the user asks to quit
 running = True
@@ -21,10 +20,11 @@ while running:
     # Events
     for event in pygame.event.get():
 
-        if mx in range(d4[0], d4[1]) and my in range(d4[2], d4[3]):  # YANMA SÖNME DENEMESİ
-            mahmut = True
-        else:
-            mahmut = False
+        for e in kares:
+            if mx in range(e.sq[0], e.sq[1]) and my in range(e.sq[2], e.sq[3]) and e.sq[5]:
+                e.sq[7] = True
+            else:
+                e.sq[7] = False
 
         if event.type == pygame.MOUSEBUTTONDOWN:
             print(mx, my)
@@ -126,15 +126,15 @@ while running:
         if e.alive:
             screen.blit(e.img, (e.posx, e.posy))
 
-    if mahmut:
-        screen.blit(BB, (d4[0], d4[2]))  # Bu yanma sönme denemesi
-
     # İşaretler
-    sign = pygame.image.load('65yi.png')
+    sign = pygame.image.load('50yi.png')
+    bsign = pygame.image.load('50i.png')
 
     for e in squares:
         if e[5]:
             screen.blit(sign, (e[0], e[2]))
+            if e[7]:
+                screen.blit(bsign, (e[0], e[2]))
 
     # Flip the display
     pygame.display.flip()
