@@ -9,6 +9,9 @@ screen = pygame.display.set_mode([980, 980])
 # Definitions Out
 reClick = False
 whitesTurn = True
+moveSound = pygame.mixer.Sound('sounds/move.mp3')
+eatSound = pygame.mixer.Sound('sounds/Eat.mp3')
+
 
 # Run until the user asks to quit
 running = True
@@ -103,6 +106,7 @@ while running:
                                 reClick = False
                                 delChoosen()
                             else:
+                                eatSound.play()
                                 e.KARE.chose = True
                                 Choosen[0].chose = True
                                 reClick = False
@@ -182,6 +186,7 @@ while running:
                                 reClick = False
                                 delChoosen()
                             else:
+                                moveSound.play()
                                 e.KARE.chose = True
                                 Choosen[0].chose = True
                                 reClick = False
@@ -215,34 +220,40 @@ while running:
     screen.blit(img, (0, 0))
 
     # İşaretler
-    sign = pygame.image.load('images/50yi.png')
-    bsign = pygame.image.load('images/50i.png')
-    tsign = pygame.image.load('images/tehdit50.png')
-    ssign = pygame.image.load('images/seçilmiş50ii.png')
+    Sign = pygame.image.load('images/50yi.png')
+    bSign = pygame.image.load('images/50i.png')
+    tSign = pygame.image.load('images/tehdit50.png')
+    sSign = pygame.image.load('images/seçilmiş50ii.png')
+    scSign = pygame.image.load('images/sahCek20.png')
 
     for e in kareler:
         # Blink
         if e.id[5]:
-            screen.blit(sign, (e.id[0], e.id[2]))
+            screen.blit(Sign, (e.id[0], e.id[2]))
             if e.id[7]:
-                screen.blit(bsign, (e.id[0], e.id[2]))
+                screen.blit(bSign, (e.id[0], e.id[2]))
         if e.chose:
-            screen.blit(ssign, (e.id[0], e.id[2]))
+            screen.blit(sSign, (e.id[0], e.id[2]))
 
         # Tehdit
         if len(Choosen) > 0:
             if Choosen[0].onIt.color == 'beyaz':
                 if e.id[6] and e.onIt.color == 'siyah':
-                    screen.blit(tsign, (e.id[0], e.id[2]))
+                    screen.blit(tSign, (e.id[0], e.id[2]))
             else:
                 if e.id[6] and e.onIt.color == 'beyaz':
-                    screen.blit(tsign, (e.id[0], e.id[2]))
+                    screen.blit(tSign, (e.id[0], e.id[2]))
 
         # Seçilmiş
         if e.onIt != 'Empty':
             if e.onIt.pressed:
-                screen.blit(bsign, (e.id[0], e.id[2]))
-                screen.blit(bsign, (e.id[0], e.id[2]))
+                screen.blit(Sign, (e.id[0], e.id[2]))
+                screen.blit(bSign, (e.id[0], e.id[2]))
+
+        # Şah Çekiliyor
+        if e.onIt == BS or e.onIt == SS:
+            if e.onIt.threatened:
+                screen.blit(scSign, (e.id[0], e.id[2]))
 
     # Pieces
     for e in pieces:
