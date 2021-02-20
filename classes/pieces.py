@@ -11,6 +11,7 @@ Bthreats = []
 Btnew = []
 Stnew = []
 threats = []
+veriSaklama = []
 
 
 # CLASSES
@@ -25,6 +26,9 @@ class Pieces(object):
 
     def death(self):
         self.alive = False
+
+    def reborn(self):
+        self.alive = True
 
 
 class Kale(Pieces):
@@ -1297,9 +1301,10 @@ class Sah(Pieces):
 
 
 class Piyon(Pieces):
-    def __init__(self, color, alive, posx, posy, img, firstMove, pressed):
+    def __init__(self, color, alive, posx, posy, img, firstMove, pressed, fmc):
         super().__init__(color, alive, posx, posy, img, pressed)
         self.firstMove = firstMove
+        self.fmc = fmc
 
     def threat(self, id, square):
 
@@ -1313,31 +1318,27 @@ class Piyon(Pieces):
         if square.onIt.color == 'beyaz':
             # Sağ Yukarı
             if (id + 9) in fulls:
-                if square.onIt.color == 'beyaz':
-                    Bthreats.append(id + 9)
-                else:
-                    Sthreats.append(id + 9)
+                Bthreats.append(id + 9)
+            else:
+                Bthreats.append(id + 9)
 
             # Sol Yukarı
             if (id + 7) in fulls:
-                if square.onIt.color == 'beyaz':
-                    Bthreats.append(id + 7)
-                else:
-                    Sthreats.append(id + 7)
+                Bthreats.append(id + 7)
+            else:
+                Bthreats.append(id + 7)
         else:
             # Sağ Yukarı
             if (id - 9) in fulls:
-                if square.onIt.color == 'beyaz':
-                    Bthreats.append(id - 9)
-                else:
-                    Sthreats.append(id - 9)
+                Sthreats.append(id - 9)
+            else:
+                Sthreats.append(id - 9)
 
             # Sol Yukarı
-            if (id + 7) in fulls:
-                if square.onIt.color == 'beyaz':
-                    Bthreats.append(id - 7)
-                else:
-                    Sthreats.append(id - 7)
+            if (id - 7) in fulls:
+                Sthreats.append(id - 7)
+            else:
+                Sthreats.append(id - 7)
 
         fulls.clear()
 
@@ -1403,6 +1404,7 @@ class Piyon(Pieces):
 
         if self.firstMove:
             self.firstMove = False
+            self.fmc = True
 
         del_dup(ids)
         Choosen.append(square)
@@ -1448,7 +1450,7 @@ class Piyon(Pieces):
             else:
                 pass
 
-        if not self.firstMove:
+        if not self.firstMove and  not self.fmc:
             self.firstMove = True
 
         ids.clear()
@@ -1479,22 +1481,22 @@ BA2 = At('beyaz', True, b1[0], b1[2], WKN, False)
 BS = Sah('beyaz', True, e1[0], e1[2], WK, False, False)
 SS = Sah('siyah', True, e8[0], e8[2], BK, False, False)
 
-BP1 = Piyon('beyaz', True, a2[0], a2[2], WP, True, False)
-BP2 = Piyon('beyaz', True, b2[0], b2[2], WP, True, False)
-BP3 = Piyon('beyaz', True, c2[0], c2[2], WP, True, False)
-BP4 = Piyon('beyaz', True, d2[0], d2[2], WP, True, False)
-BP5 = Piyon('beyaz', True, e2[0], e2[2], WP, True, False)
-BP6 = Piyon('beyaz', True, f2[0], f2[2], WP, True, False)
-BP7 = Piyon('beyaz', True, g2[0], g2[2], WP, True, False)
-BP8 = Piyon('beyaz', True, h2[0], h2[2], WP, True, False)
-SP1 = Piyon('siyah', True, a7[0], a7[2], BP, True, False)
-SP2 = Piyon('siyah', True, b7[0], b7[2], BP, True, False)
-SP3 = Piyon('siyah', True, c7[0], c7[2], BP, True, False)
-SP4 = Piyon('siyah', True, d7[0], d7[2], BP, True, False)
-SP5 = Piyon('siyah', True, e7[0], e7[2], BP, True, False)
-SP6 = Piyon('siyah', True, f7[0], f7[2], BP, True, False)
-SP7 = Piyon('siyah', True, g7[0], g7[2], BP, True, False)
-SP8 = Piyon('siyah', True, h7[0], h7[2], BP, True, False)
+BP1 = Piyon('beyaz', True, a2[0], a2[2], WP, True, False, False)
+BP2 = Piyon('beyaz', True, b2[0], b2[2], WP, True, False, False)
+BP3 = Piyon('beyaz', True, c2[0], c2[2], WP, True, False, False)
+BP4 = Piyon('beyaz', True, d2[0], d2[2], WP, True, False, False)
+BP5 = Piyon('beyaz', True, e2[0], e2[2], WP, True, False, False)
+BP6 = Piyon('beyaz', True, f2[0], f2[2], WP, True, False, False)
+BP7 = Piyon('beyaz', True, g2[0], g2[2], WP, True, False, False)
+BP8 = Piyon('beyaz', True, h2[0], h2[2], WP, True, False, False)
+SP1 = Piyon('siyah', True, a7[0], a7[2], BP, True, False, False)
+SP2 = Piyon('siyah', True, b7[0], b7[2], BP, True, False, False)
+SP3 = Piyon('siyah', True, c7[0], c7[2], BP, True, False, False)
+SP4 = Piyon('siyah', True, d7[0], d7[2], BP, True, False, False)
+SP5 = Piyon('siyah', True, e7[0], e7[2], BP, True, False, False)
+SP6 = Piyon('siyah', True, f7[0], f7[2], BP, True, False, False)
+SP7 = Piyon('siyah', True, g7[0], g7[2], BP, True, False, False)
+SP8 = Piyon('siyah', True, h7[0], h7[2], BP, True, False, False)
 
 
 pieces = [SF1, SF2, BF1, BF2, SK1, SK2, BV, SA1, SA2, SS, BK1, BK2, BA1, BA2, BS, SV, BP1, BP2,
@@ -1533,6 +1535,11 @@ def defthreats():
 
     Bthreats = Btnew
     print('Btnew:', Btnew)
+
+def save():
+    for elements in Choosen:
+        veriSaklama.append(elements.onIt)
+        print(veriSaklama, 'BURASI VERİ SAKLAMA')
 
 
 # SQUARES
