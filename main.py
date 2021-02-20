@@ -86,7 +86,6 @@ while running:
                                     else:
                                         SS.false_thr()
                                         print('Siyah:', SS.threatened)
-
                             if whitesTurn and BS.threatened:
                                 seçilmiş.change_onIt(e.KARE.onIt)
                                 seçilmiş.change_sit(e.KARE.situation)
@@ -235,7 +234,7 @@ while running:
     # İşaretler
     Sign = pygame.image.load('images/50yi.png')
     bSign = pygame.image.load('images/50i.png')
-    tSign = pygame.image.load('images/tehdit50.png')
+    tSign = pygame.image.load('images/tehdit60i.png')
     sSign = pygame.image.load('images/seçilmiş50ii.png')
     scSign = pygame.image.load('images/sahCek20.png')
 
