@@ -60,9 +60,48 @@ while running:
                             seçilmiş.onIt.posy = e.sq[2]
                             seçilmiş.change_onIt('Empty')
                             seçilmiş.change_sit('empty')
-                            delChoosen()
-                            reClick = not reClick
-                            whitesTurn = not whitesTurn
+
+                            defthreats()
+                            for x in kareler:
+                                if x.onIt == BS:
+                                    if x.id[4] in Stnew:
+                                        BS.true_thr()
+                                        print('Beyaz: ', BS.threatened)
+                                    else:
+                                        BS.false_thr()
+                                        print('Beyaz: ', BS.threatened)
+                            for x in kareler:
+                                if x.onIt == SS:
+                                    if x.id[4] in Btnew:
+                                        SS.true_thr()
+                                        print('Siyah: ', SS.threatened)
+                                    else:
+                                        SS.false_thr()
+                                        print('Siyah:', SS.threatened)
+
+                            if whitesTurn and BS.threatened:
+                                seçilmiş.change_onIt(e.KARE.onIt)
+                                seçilmiş.change_sit(e.KARE.situation)
+                                e.KARE.onIt.posx = seçilmiş.id[0]
+                                e.KARE.onIt.posy = seçilmiş.id[2]
+                                e.KARE.change_onIt('Empty')
+                                e.KARE.change_sit('empty')
+                                reClick = False
+                                delChoosen()
+                            elif whitesTurn == False and SS.threatened:
+                                seçilmiş.change_onIt(e.KARE.onIt)
+                                seçilmiş.change_sit(e.KARE.situation)
+                                e.KARE.onIt.posx = seçilmiş.id[0]
+                                e.KARE.onIt.posy = seçilmiş.id[2]
+                                e.KARE.change_onIt('Empty')
+                                e.KARE.change_sit('empty')
+                                reClick = False
+                                delChoosen()
+                            else:
+                                reClick = False
+                                whitesTurn = not whitesTurn
+                                delChoosen()
+
                         else:
                             print('KENDİ TAŞINI YİYEMEZSİN')
                     # Empty   
@@ -96,24 +135,22 @@ while running:
                             seçilmiş.change_sit('empty')
 
                             defthreats()
-                            if whitesTurn:
-                                for x in kareler:
-                                    if x.onIt == BS:
-                                        if x.id[4] in Stnew:
-                                            BS.true_thr()
-                                            print(BS.threatened)
-                                        else:
-                                            BS.false_thr()
-                                            print(BS.threatened)
-                            else:
-                                for x in kareler:
-                                    if x.onIt == SS:
-                                        if x.id[4] in Btnew:
-                                            SS.true_thr()
-                                            print(SS.threatened)
-                                        else:
-                                            SS.false_thr()
-                                            print(SS.threatened)
+                            for x in kareler:
+                                if x.onIt == BS:
+                                    if x.id[4] in Stnew:
+                                        BS.true_thr()
+                                        print('Beyaz: ', BS.threatened)
+                                    else:
+                                        BS.false_thr()
+                                        print('Beyaz: ', BS.threatened)
+                            for x in kareler:
+                                if x.onIt == SS:
+                                    if x.id[4] in Btnew:
+                                        SS.true_thr()
+                                        print('Siyah: ', SS.threatened)
+                                    else:
+                                        SS.false_thr()
+                                        print('Siyah:', SS.threatened)
 
                             if whitesTurn and BS.threatened:
                                 seçilmiş.change_onIt(e.KARE.onIt)
@@ -123,12 +160,20 @@ while running:
                                 e.KARE.change_onIt('Empty')
                                 e.KARE.change_sit('empty')
                                 reClick = False
+                                delChoosen()
+                            elif whitesTurn == False and SS.threatened:
+                                seçilmiş.change_onIt(e.KARE.onIt)
+                                seçilmiş.change_sit(e.KARE.situation)
+                                e.KARE.onIt.posx = seçilmiş.id[0]
+                                e.KARE.onIt.posy = seçilmiş.id[2]
+                                e.KARE.change_onIt('Empty')
+                                e.KARE.change_sit('empty')
+                                reClick = False
+                                delChoosen()
                             else:
                                 reClick = False
                                 whitesTurn = not whitesTurn
                                 delChoosen()
-
-
 
                         # Click
                         else:
@@ -162,12 +207,20 @@ while running:
     # İşaretler
     sign = pygame.image.load('images/50yi.png')
     bsign = pygame.image.load('images/50i.png')
+    tsign = pygame.image.load('images/tehdit50.png')
 
-    for e in squares:
-        if e[5]:
-            screen.blit(sign, (e[0], e[2]))
-            if e[7]:
-                screen.blit(bsign, (e[0], e[2]))
+    for e in kareler:
+        if e.id[5]:
+            screen.blit(sign, (e.id[0], e.id[2]))
+            if e.id[7]:
+                screen.blit(bsign, (e.id[0], e.id[2]))
+        if len(Choosen) > 0:
+            if Choosen[0].onIt.color == 'beyaz':
+                if e.id[6] and e.onIt.color == 'siyah':
+                    screen.blit(tsign, (e.id[0], e.id[2]))
+            else:
+                if e.id[6] and e.onIt.color == 'beyaz':
+                    screen.blit(tsign, (e.id[0], e.id[2]))
 
     # Flip the display
     pygame.display.flip()
