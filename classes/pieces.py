@@ -1063,8 +1063,6 @@ class Sah(Pieces):
 
     def threat(self, id, square):
 
-
-
         sat = (id // 8) + 1
         süt = (id % 8) + 1
 
@@ -1306,6 +1304,9 @@ class Piyon(Pieces):
         self.firstMove = firstMove
         self.fmc = fmc
 
+    def change_fm(self):
+        self.firstMove = False
+
     def threat(self, id, square):
 
         sat = (id // 8) + 1
@@ -1361,7 +1362,7 @@ class Piyon(Pieces):
 
         if square.onIt.color == 'beyaz':
             # Yukarı
-            if square.onIt.firstMove:
+            if self.firstMove:
                 for x in range(1, 3):
                     if (id + 8 * x) in fulls:
                         break
@@ -1382,7 +1383,7 @@ class Piyon(Pieces):
                 tehditfulls.append(id + 9)
         else:
             # Yukarı
-            if square.onIt.firstMove:
+            if self.firstMove:
                 for x in range(1, 3):
                     if (id - 8 * x) in fulls:
                         break
@@ -1401,10 +1402,6 @@ class Piyon(Pieces):
             # Sağ Yukarı
             if (id - 9) in fulls:
                 tehditfulls.append(id - 9)
-
-        if self.firstMove:
-            self.firstMove = False
-            self.fmc = True
 
         del_dup(ids)
         Choosen.append(square)
@@ -1436,7 +1433,7 @@ class Piyon(Pieces):
 
     def press_again(self):
 
-        self. pressed = False
+        self.pressed = False
 
         for elements in squares:
             if elements[5]:
@@ -1449,9 +1446,6 @@ class Piyon(Pieces):
                 elements[6] = False
             else:
                 pass
-
-        if not self.firstMove and  not self.fmc:
-            self.firstMove = True
 
         ids.clear()
         Choosen.clear()
@@ -1498,9 +1492,10 @@ SP6 = Piyon('siyah', True, f7[0], f7[2], BP, True, False, False)
 SP7 = Piyon('siyah', True, g7[0], g7[2], BP, True, False, False)
 SP8 = Piyon('siyah', True, h7[0], h7[2], BP, True, False, False)
 
-
 pieces = [SF1, SF2, BF1, BF2, SK1, SK2, BV, SA1, SA2, SS, BK1, BK2, BA1, BA2, BS, SV, BP1, BP2,
           BP3, BP4, BP5, BP6, BP7, BP8, SP1, SP2, SP3, SP4, SP5, SP6, SP7, SP8]
+
+pawns = [BP1, BP2, BP3, BP4, BP5, BP6, BP7, BP8, SP1, SP2, SP3, SP4, SP5, SP6, SP7, SP8]
 
 
 # FUNCTIONS
@@ -1536,10 +1531,14 @@ def defthreats():
     Bthreats = Btnew
     print('Btnew:', Btnew)
 
+
 def save():
     for elements in Choosen:
         veriSaklama.append(elements.onIt)
         print(veriSaklama, 'BURASI VERİ SAKLAMA')
+
+def delVeri():
+    veriSaklama.clear()
 
 
 # SQUARES

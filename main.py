@@ -12,7 +12,6 @@ whitesTurn = True
 moveSound = pygame.mixer.Sound('sounds/move.mp3')
 eatSound = pygame.mixer.Sound('sounds/Eat.mp3')
 
-
 # Run until the user asks to quit
 running = True
 while running:
@@ -35,14 +34,13 @@ while running:
             for e in kares:
                 # Pick
                 if mx in range(e.sq[0], e.sq[1]) and my in range(e.sq[2], e.sq[3]):
-                    print(whitesTurn, 'bo0')
 
                     # Eat
                     if e.sq[6] and e.sq[5] == False and e.KARE.onIt != 'Empty':
                         print('eat')
                         if Choosen[0].onIt.color != e.KARE.onIt.color:
                             e.KARE.onIt.death()
-                            print(e.KARE.onIt.alive)
+                            print('WhitesTurn: ', whitesTurn)
 
                             for x in kareler:
                                 if x.onIt != 'Empty':
@@ -60,8 +58,9 @@ while running:
                                     elements[6] = False
                                 else:
                                     pass
-                            
-                            save()
+
+                            veriSaklama.append(e.KARE.onIt)
+
                             seçilmiş = Choosen[0]
                             e.KARE.change_onIt(seçilmiş.onIt)
                             e.KARE.change_sit(seçilmiş.situation)
@@ -69,7 +68,6 @@ while running:
                             seçilmiş.onIt.posy = e.sq[2]
                             seçilmiş.change_onIt('Empty')
                             seçilmiş.change_sit('empty')
-                            print(veriSaklama,'BURASII')
 
                             defthreats()
                             for x in kareler:
@@ -95,12 +93,12 @@ while running:
                                 e.KARE.onIt.posx = seçilmiş.id[0]
                                 e.KARE.onIt.posy = seçilmiş.id[2]
                                 e.KARE.change_onIt(veriSaklama[0])
-                                e.KARE.change_sit('empty')
                                 reClick = False
                                 e.KARE.onIt.reborn()
-                                print(e.KARE.onIt.alive)
+                                delVeri()
                                 delChoosen()
-                            elif whitesTurn == False and SS.threatened:
+                            elif not whitesTurn and SS.threatened:
+                                print('BURAYA DÜŞTÜÜÜÜ')
                                 seçilmiş.change_onIt(e.KARE.onIt)
                                 seçilmiş.change_sit(e.KARE.situation)
                                 e.KARE.onIt.posx = seçilmiş.id[0]
@@ -109,13 +107,19 @@ while running:
                                 e.KARE.change_sit('empty')
                                 reClick = False
                                 e.KARE.onIt.reborn()
+                                delVeri()
                                 delChoosen()
                             else:
+                                if Choosen[0].onIt in pawns:
+                                    if not Choosen[0].firstMove and not Choosen.fmc:
+                                        Choosen[0].firstMove = True
+                                        Choosen.fmc = True
                                 eatSound.play()
                                 e.KARE.chose = True
                                 Choosen[0].chose = True
                                 reClick = False
                                 whitesTurn = not whitesTurn
+                                delVeri()
                                 delChoosen()
                         else:
                             print('KENDİ TAŞINI YİYEMEZSİN')
@@ -146,6 +150,7 @@ while running:
                                 else:
                                     pass
 
+                            save()
                             seçilmiş = Choosen[0]
                             e.KARE.change_onIt(seçilmiş.onIt)
                             e.KARE.change_sit(seçilmiş.situation)
@@ -191,11 +196,14 @@ while running:
                                 reClick = False
                                 delChoosen()
                             else:
+                                if veriSaklama[0] in pawns:
+                                    veriSaklama[0].change_fm()
                                 moveSound.play()
                                 e.KARE.chose = True
                                 Choosen[0].chose = True
                                 reClick = False
                                 whitesTurn = not whitesTurn
+                                delVeri()
                                 delChoosen()
                         # Click
                         else:
