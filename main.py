@@ -41,6 +41,11 @@ while running:
                             e.KARE.onIt.death()
                             print(e.KARE.onIt.alive)
 
+                            for x in kareler:
+                                if x.onIt != 'Empty':
+                                    if x.onIt.pressed:
+                                        x.onIt.pressed = False
+
                             for elements in squares:
                                 if elements[5]:
                                     elements[5] = False
@@ -98,10 +103,11 @@ while running:
                                 reClick = False
                                 delChoosen()
                             else:
+                                e.KARE.chose = True
+                                Choosen[0].chose = True
                                 reClick = False
                                 whitesTurn = not whitesTurn
                                 delChoosen()
-
                         else:
                             print('KENDİ TAŞINI YİYEMEZSİN')
                     # Empty   
@@ -114,6 +120,11 @@ while running:
                         if e.sq[5]:
                             print('hareket')
 
+                            for x in kareler:
+                                if x.onIt != 'Empty':
+                                    if x.onIt.pressed:
+                                        x.onIt.pressed = False
+
                             for elements in squares:
                                 if elements[5]:
                                     elements[5] = False
@@ -171,10 +182,11 @@ while running:
                                 reClick = False
                                 delChoosen()
                             else:
+                                e.KARE.chose = True
+                                Choosen[0].chose = True
                                 reClick = False
                                 whitesTurn = not whitesTurn
                                 delChoosen()
-
                         # Click
                         else:
                             if whitesTurn == True and e.KARE.onIt.color == 'beyaz' or whitesTurn == False and e.KARE.onIt.color == 'siyah':
@@ -186,6 +198,9 @@ while running:
                                 # First Click
                                 else:
                                     print('İlk Evre')
+                                    for i in kareler:
+                                        if i.chose:
+                                            i.chose = False
                                     e.KARE.onIt.press(e.sq[4], e.KARE)
                                     reClick = not reClick
                                     print(whitesTurn, 'bo1')
@@ -199,21 +214,22 @@ while running:
     img = pygame.image.load('images/chessTable.png')
     screen.blit(img, (0, 0))
 
-    # Pieces
-    for e in pieces:
-        if e.alive:
-            screen.blit(e.img, (e.posx, e.posy))
-
     # İşaretler
     sign = pygame.image.load('images/50yi.png')
     bsign = pygame.image.load('images/50i.png')
     tsign = pygame.image.load('images/tehdit50.png')
+    ssign = pygame.image.load('images/seçilmiş50ii.png')
 
     for e in kareler:
+        # Blink
         if e.id[5]:
             screen.blit(sign, (e.id[0], e.id[2]))
             if e.id[7]:
                 screen.blit(bsign, (e.id[0], e.id[2]))
+        if e.chose:
+            screen.blit(ssign, (e.id[0], e.id[2]))
+
+        # Tehdit
         if len(Choosen) > 0:
             if Choosen[0].onIt.color == 'beyaz':
                 if e.id[6] and e.onIt.color == 'siyah':
@@ -221,6 +237,17 @@ while running:
             else:
                 if e.id[6] and e.onIt.color == 'beyaz':
                     screen.blit(tsign, (e.id[0], e.id[2]))
+
+        # Seçilmiş
+        if e.onIt != 'Empty':
+            if e.onIt.pressed:
+                screen.blit(bsign, (e.id[0], e.id[2]))
+                screen.blit(bsign, (e.id[0], e.id[2]))
+
+    # Pieces
+    for e in pieces:
+        if e.alive:
+            screen.blit(e.img, (e.posx, e.posy))
 
     # Flip the display
     pygame.display.flip()

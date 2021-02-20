@@ -15,20 +15,21 @@ threats = []
 
 # CLASSES
 class Pieces(object):
-    def __init__(self, color, alive, posx, posy, img):
+    def __init__(self, color, alive, posx, posy, img, pressed):
         self.color = color
         self.alive = alive
         self.posx = posx
         self.posy = posy
         self.img = img
+        self.pressed = pressed
 
     def death(self):
         self.alive = False
 
 
 class Kale(Pieces):
-    def __init__(self, color, alive, posx, posy, img):
-        super().__init__(color, alive, posx, posy, img)
+    def __init__(self, color, alive, posx, posy, img, pressed):
+        super().__init__(color, alive, posx, posy, img, pressed)
 
     def threat(self, id, square):
 
@@ -99,6 +100,8 @@ class Kale(Pieces):
 
     def press(self, id, square):
         print(ids)
+
+        self.pressed = True
 
         sat = (id // 8) + 1
         süt = (id % 8) + 1
@@ -173,6 +176,9 @@ class Kale(Pieces):
         tehditfulls.clear()
 
     def press_again(self):
+
+        self.pressed = False
+
         for elements in squares:
             if elements[5]:
                 elements[5] = False
@@ -193,8 +199,8 @@ class Kale(Pieces):
 
 
 class Fil(Pieces):
-    def __init__(self, color, alive, posx, posy, scolor, img):
-        super().__init__(color, alive, posx, posy, img)
+    def __init__(self, color, alive, posx, posy, scolor, img, pressed):
+        super().__init__(color, alive, posx, posy, img, pressed)
         self.scolor = scolor
 
     def threat(self, id, square):
@@ -325,6 +331,8 @@ class Fil(Pieces):
     def press(self, id, square):
         print(ids)
 
+        self.pressed = True
+
         sat = (id // 8) + 1
         süt = (id % 8) + 1
 
@@ -432,6 +440,9 @@ class Fil(Pieces):
         tehditfulls.clear()
 
     def press_again(self):
+
+        self.pressed = False
+
         for elements in squares:
             if elements[5]:
                 elements[5] = False
@@ -452,8 +463,8 @@ class Fil(Pieces):
 
 
 class Vezir(Pieces):
-    def __init__(self, color, alive, posx, posy, img):
-        super().__init__(color, alive, posx, posy, img)
+    def __init__(self, color, alive, posx, posy, img, pressed):
+        super().__init__(color, alive, posx, posy, img, pressed)
 
     def threat(self, id, square):
 
@@ -636,6 +647,8 @@ class Vezir(Pieces):
 
     def press(self, id, square):
         print(ids)
+
+        self.pressed = True
 
         sat = (id // 8) + 1
         süt = (id % 8) + 1
@@ -774,6 +787,9 @@ class Vezir(Pieces):
         tehditfulls.clear()
 
     def press_again(self):
+
+        self.pressed = False
+
         for elements in squares:
             if elements[5]:
                 elements[5] = False
@@ -794,8 +810,8 @@ class Vezir(Pieces):
 
 
 class At(Pieces):
-    def __init__(self, color, alive, posx, posy, img):
-        super().__init__(color, alive, posx, posy, img)
+    def __init__(self, color, alive, posx, posy, img, pressed):
+        super().__init__(color, alive, posx, posy, img, pressed)
 
     def threat(self, id, square):
 
@@ -913,6 +929,8 @@ class At(Pieces):
     def press(self, id, square):
         print(ids)
 
+        self.pressed = True
+
         sat = (id // 8) + 1
         süt = (id % 8) + 1
 
@@ -1006,6 +1024,9 @@ class At(Pieces):
         tehditfulls.clear()
 
     def press_again(self):
+
+        self.pressed = False
+
         for elements in squares:
             if elements[5]:
                 elements[5] = False
@@ -1025,9 +1046,9 @@ class At(Pieces):
         print(ids, Choosen, fulls)
 
 
-class Şah(Pieces):
-    def __init__(self, color, alive, posx, posy, img, threatened):
-        super().__init__(color, alive, posx, posy, img)
+class Sah(Pieces):
+    def __init__(self, color, alive, posx, posy, img, threatened, pressed):
+        super().__init__(color, alive, posx, posy, img, pressed)
         self.threatened = threatened
 
     def true_thr(self):
@@ -1037,6 +1058,8 @@ class Şah(Pieces):
         self.threatened = False
 
     def threat(self, id, square):
+
+
 
         sat = (id // 8) + 1
         süt = (id % 8) + 1
@@ -1150,6 +1173,8 @@ class Şah(Pieces):
 
     def press(self, id, square):
 
+        self.pressed = True
+
         sat = (id // 8) + 1
         süt = (id % 8) + 1
 
@@ -1249,6 +1274,9 @@ class Şah(Pieces):
         tehditfulls.clear()
 
     def press_again(self):
+
+        self.pressed = False
+
         for elements in squares:
             if elements[5]:
                 elements[5] = False
@@ -1269,8 +1297,8 @@ class Şah(Pieces):
 
 
 class Piyon(Pieces):
-    def __init__(self, color, alive, posx, posy, img, firstMove):
-        super().__init__(color, alive, posx, posy, img)
+    def __init__(self, color, alive, posx, posy, img, firstMove, pressed):
+        super().__init__(color, alive, posx, posy, img, pressed)
         self.firstMove = firstMove
 
     def threat(self, id, square):
@@ -1315,6 +1343,8 @@ class Piyon(Pieces):
 
     def press(self, id, square):
         print(ids)
+
+        self.pressed = True
 
         sat = (id // 8) + 1
         süt = (id % 8) + 1
@@ -1403,6 +1433,9 @@ class Piyon(Pieces):
         tehditfulls.clear()
 
     def press_again(self):
+
+        self. pressed = False
+
         for elements in squares:
             if elements[5]:
                 elements[5] = False
@@ -1426,42 +1459,42 @@ class Piyon(Pieces):
 
 
 # PIECES
-SF1 = Fil('siyah', True, c8[0], c8[2], 'black', BB)
-SF2 = Fil('siyah', True, f8[0], f8[2], 'white', BB)
-BF1 = Fil('beyaz', True, c1[0], c1[2], 'white', WB)
-BF2 = Fil('beyaz', True, f1[0], f1[2], 'black', WB)
+SF1 = Fil('siyah', True, c8[0], c8[2], 'black', BB, False)
+SF2 = Fil('siyah', True, f8[0], f8[2], 'white', BB, False)
+BF1 = Fil('beyaz', True, c1[0], c1[2], 'white', WB, False)
+BF2 = Fil('beyaz', True, f1[0], f1[2], 'black', WB, False)
 
-SK1 = Kale('siyah', True, a8[0], a8[2], BR)
-SK2 = Kale('siyah', True, h8[0], h8[2], BR)
-BK1 = Kale('beyaz', True, a1[0], a1[2], WR)
-BK2 = Kale('beyaz', True, h1[0], h1[2], WR)
-BV = Vezir('beyaz', True, d1[0], d1[2], WQ)
-SV = Vezir('siyah', True, d8[0], d8[2], BQ)
+SK1 = Kale('siyah', True, a8[0], a8[2], BR, False)
+SK2 = Kale('siyah', True, h8[0], h8[2], BR, False)
+BK1 = Kale('beyaz', True, a1[0], a1[2], WR, False)
+BK2 = Kale('beyaz', True, h1[0], h1[2], WR, False)
+BV = Vezir('beyaz', True, d1[0], d1[2], WQ, False)
+SV = Vezir('siyah', True, d8[0], d8[2], BQ, False)
 
-SA1 = At('siyah', True, b8[0], b8[2], BKN)
-SA2 = At('siyah', True, g8[0], g8[2], BKN)
-BA1 = At('beyaz', True, g1[0], g1[2], WKN)
-BA2 = At('beyaz', True, b1[0], b1[2], WKN)
+SA1 = At('siyah', True, b8[0], b8[2], BKN, False)
+SA2 = At('siyah', True, g8[0], g8[2], BKN, False)
+BA1 = At('beyaz', True, g1[0], g1[2], WKN, False)
+BA2 = At('beyaz', True, b1[0], b1[2], WKN, False)
 
-BS = Şah('beyaz', True, e1[0], e1[2], WK, False)
-SS = Şah('siyah', True, e8[0], e8[2], BK, False)
+BS = Sah('beyaz', True, e1[0], e1[2], WK, False, False)
+SS = Sah('siyah', True, e8[0], e8[2], BK, False, False)
 
-BP1 = Piyon('beyaz', True, a2[0], a2[2], WP, True)
-BP2 = Piyon('beyaz', True, b2[0], b2[2], WP, True)
-BP3 = Piyon('beyaz', True, c2[0], c2[2], WP, True)
-BP4 = Piyon('beyaz', True, d2[0], d2[2], WP, True)
-BP5 = Piyon('beyaz', True, e2[0], e2[2], WP, True)
-BP6 = Piyon('beyaz', True, f2[0], f2[2], WP, True)
-BP7 = Piyon('beyaz', True, g2[0], g2[2], WP, True)
-BP8 = Piyon('beyaz', True, h2[0], h2[2], WP, True)
-SP1 = Piyon('siyah', True, a7[0], a7[2], BP, True)
-SP2 = Piyon('siyah', True, b7[0], b7[2], BP, True)
-SP3 = Piyon('siyah', True, c7[0], c7[2], BP, True)
-SP4 = Piyon('siyah', True, d7[0], d7[2], BP, True)
-SP5 = Piyon('siyah', True, e7[0], e7[2], BP, True)
-SP6 = Piyon('siyah', True, f7[0], f7[2], BP, True)
-SP7 = Piyon('siyah', True, g7[0], g7[2], BP, True)
-SP8 = Piyon('siyah', True, h7[0], h7[2], BP, True)
+BP1 = Piyon('beyaz', True, a2[0], a2[2], WP, True, False)
+BP2 = Piyon('beyaz', True, b2[0], b2[2], WP, True, False)
+BP3 = Piyon('beyaz', True, c2[0], c2[2], WP, True, False)
+BP4 = Piyon('beyaz', True, d2[0], d2[2], WP, True, False)
+BP5 = Piyon('beyaz', True, e2[0], e2[2], WP, True, False)
+BP6 = Piyon('beyaz', True, f2[0], f2[2], WP, True, False)
+BP7 = Piyon('beyaz', True, g2[0], g2[2], WP, True, False)
+BP8 = Piyon('beyaz', True, h2[0], h2[2], WP, True, False)
+SP1 = Piyon('siyah', True, a7[0], a7[2], BP, True, False)
+SP2 = Piyon('siyah', True, b7[0], b7[2], BP, True, False)
+SP3 = Piyon('siyah', True, c7[0], c7[2], BP, True, False)
+SP4 = Piyon('siyah', True, d7[0], d7[2], BP, True, False)
+SP5 = Piyon('siyah', True, e7[0], e7[2], BP, True, False)
+SP6 = Piyon('siyah', True, f7[0], f7[2], BP, True, False)
+SP7 = Piyon('siyah', True, g7[0], g7[2], BP, True, False)
+SP8 = Piyon('siyah', True, h7[0], h7[2], BP, True, False)
 
 
 pieces = [SF1, SF2, BF1, BF2, SK1, SK2, BV, SA1, SA2, SS, BK1, BK2, BA1, BA2, BS, SV, BP1, BP2,
@@ -1504,10 +1537,12 @@ def defthreats():
 
 # SQUARES
 class Kareler(object):
-    def __init__(self, situation, onIt, id):
+    def __init__(self, situation, onIt, id, chose, chosen):
         self.situation = situation
         self.onIt = onIt
         self.id = id
+        self.chose = chose
+        self.chosen = chosen
 
     def change_onIt(self, onIt):
         self.onIt = onIt
@@ -1516,77 +1551,77 @@ class Kareler(object):
         self.situation = situation
 
 
-A1 = Kareler('empty', BK1, a1)
-A2 = Kareler('empty', BP1, a2)
-A3 = Kareler('empty', 'Empty', a3)
-A4 = Kareler('empty', 'Empty', a4)
-A5 = Kareler('empty', 'Empty', a5)
-A6 = Kareler('empty', 'Empty', a6)
-A7 = Kareler('empty', SP1, a7)
-A8 = Kareler('empty', SK1, a8)
+A1 = Kareler('empty', BK1, a1, False, False)
+A2 = Kareler('empty', BP1, a2, False, False)
+A3 = Kareler('empty', 'Empty', a3, False, False)
+A4 = Kareler('empty', 'Empty', a4, False, False)
+A5 = Kareler('empty', 'Empty', a5, False, False)
+A6 = Kareler('empty', 'Empty', a6, False, False)
+A7 = Kareler('empty', SP1, a7, False, False)
+A8 = Kareler('empty', SK1, a8, False, False)
 
-B1 = Kareler('empty', BA2, b1)
-B2 = Kareler('empty', BP2, b2)
-B3 = Kareler('empty', 'Empty', b3)
-B4 = Kareler('empty', 'Empty', b4)
-B5 = Kareler('empty', 'Empty', b5)
-B6 = Kareler('empty', 'Empty', b6)
-B7 = Kareler('empty', SP2, b7)
-B8 = Kareler('empty', SA1, b8)
+B1 = Kareler('empty', BA2, b1, False, False)
+B2 = Kareler('empty', BP2, b2, False, False)
+B3 = Kareler('empty', 'Empty', b3, False, False)
+B4 = Kareler('empty', 'Empty', b4, False, False)
+B5 = Kareler('empty', 'Empty', b5, False, False)
+B6 = Kareler('empty', 'Empty', b6, False, False)
+B7 = Kareler('empty', SP2, b7, False, False)
+B8 = Kareler('empty', SA1, b8, False, False)
 
-C1 = Kareler('empty', BF1, c1)
-C2 = Kareler('empty', BP3, c2)
-C3 = Kareler('empty', 'Empty', c3)
-C4 = Kareler('empty', 'Empty', c4)
-C5 = Kareler('empty', 'Empty', c5)
-C6 = Kareler('empty', 'Empty', c6)
-C7 = Kareler('empty', SP3, c7)
-C8 = Kareler('empty', SF1, c8)
+C1 = Kareler('empty', BF1, c1, False, False)
+C2 = Kareler('empty', BP3, c2, False, False)
+C3 = Kareler('empty', 'Empty', c3, False, False)
+C4 = Kareler('empty', 'Empty', c4, False, False)
+C5 = Kareler('empty', 'Empty', c5, False, False)
+C6 = Kareler('empty', 'Empty', c6, False, False)
+C7 = Kareler('empty', SP3, c7, False, False)
+C8 = Kareler('empty', SF1, c8, False, False)
 
-D1 = Kareler('empty', BV, d1)
-D2 = Kareler('empty', BP4, d2)
-D3 = Kareler('empty', 'Empty', d3)
-D4 = Kareler('empty', 'Empty', d4)
-D5 = Kareler('empty', 'Empty', d5)
-D6 = Kareler('empty', 'Empty', d6)
-D7 = Kareler('empty', SP4, d7)
-D8 = Kareler('empty', SV, d8)
+D1 = Kareler('empty', BV, d1, False, False)
+D2 = Kareler('empty', BP4, d2, False, False)
+D3 = Kareler('empty', 'Empty', d3, False, False)
+D4 = Kareler('empty', 'Empty', d4, False, False)
+D5 = Kareler('empty', 'Empty', d5, False, False)
+D6 = Kareler('empty', 'Empty', d6, False, False)
+D7 = Kareler('empty', SP4, d7, False, False)
+D8 = Kareler('empty', SV, d8, False, False)
 
-E1 = Kareler('empty', BS, e1)
-E2 = Kareler('empty', BP5, e2)
-E3 = Kareler('empty', 'Empty', e3)
-E4 = Kareler('empty', 'Empty', e4)
-E5 = Kareler('empty', 'Empty', e5)
-E6 = Kareler('empty', 'Empty', e6)
-E7 = Kareler('empty', SP5, e7)
-E8 = Kareler('empty', SS, e8)
+E1 = Kareler('empty', BS, e1, False, False)
+E2 = Kareler('empty', BP5, e2, False, False)
+E3 = Kareler('empty', 'Empty', e3, False, False)
+E4 = Kareler('empty', 'Empty', e4, False, False)
+E5 = Kareler('empty', 'Empty', e5, False, False)
+E6 = Kareler('empty', 'Empty', e6, False, False)
+E7 = Kareler('empty', SP5, e7, False, False)
+E8 = Kareler('empty', SS, e8, False, False)
 
-F1 = Kareler('empty', BF2, f1)
-F2 = Kareler('empty', BP6, f2)
-F3 = Kareler('empty', 'Empty', f3)
-F4 = Kareler('empty', 'Empty', f4)
-F5 = Kareler('empty', 'Empty', f5)
-F6 = Kareler('empty', 'Empty', f6)
-F7 = Kareler('empty', SP6, f7)
-F8 = Kareler('empty', SF2, f8)
+F1 = Kareler('empty', BF2, f1, False, False)
+F2 = Kareler('empty', BP6, f2, False, False)
+F3 = Kareler('empty', 'Empty', f3, False, False)
+F4 = Kareler('empty', 'Empty', f4, False, False)
+F5 = Kareler('empty', 'Empty', f5, False, False)
+F6 = Kareler('empty', 'Empty', f6, False, False)
+F7 = Kareler('empty', SP6, f7, False, False)
+F8 = Kareler('empty', SF2, f8, False, False)
 
-G1 = Kareler('empty', BA1, g1)
-G2 = Kareler('empty', BP7, g2)
-G3 = Kareler('empty', 'Empty', g3)
-G4 = Kareler('empty', 'Empty', g4)
-G5 = Kareler('empty', 'Empty', g5)
-G6 = Kareler('empty', 'Empty', g6)
-G7 = Kareler('empty', SP7, g7)
-G8 = Kareler('empty', SA2, g8)
+G1 = Kareler('empty', BA1, g1, False, False)
+G2 = Kareler('empty', BP7, g2, False, False)
+G3 = Kareler('empty', 'Empty', g3, False, False)
+G4 = Kareler('empty', 'Empty', g4, False, False)
+G5 = Kareler('empty', 'Empty', g5, False, False)
+G6 = Kareler('empty', 'Empty', g6, False, False)
+G7 = Kareler('empty', SP7, g7, False, False)
+G8 = Kareler('empty', SA2, g8, False, False)
 
-H1 = Kareler('empty', BK2, h1)
-H2 = Kareler('empty', BP8, h2)
-H3 = Kareler('empty', 'Empty', h3)
-H4 = Kareler('empty', 'Empty', h4)
-H5 = Kareler('empty', 'Empty', h5)
-H6 = Kareler('empty', 'Empty', h6)
-H7 = Kareler('empty', SP8, h7)
-H8 = Kareler('empty', SK2, h8)
+H1 = Kareler('empty', BK2, h1, False, False)
+H2 = Kareler('empty', BP8, h2, False, False)
+H3 = Kareler('empty', 'Empty', h3, False, False)
+H4 = Kareler('empty', 'Empty', h4, False, False)
+H5 = Kareler('empty', 'Empty', h5, False, False)
+H6 = Kareler('empty', 'Empty', h6, False, False)
+H7 = Kareler('empty', SP8, h7, False, False)
+H8 = Kareler('empty', SK2, h8, False, False)
 
 kareler = [A1, A2, A3, A4, A5, A6, A7, A8, B1, B2, B3, B4, B5, B6, B7, B8, C1, C2, C3, C4, C5, C6, C7, C8, D1, D2, D3,
            D4, D5, D6, D7, D8, E1, E2, E3, E4, E5, E6, E7, E8, F1, F2, F3, F4, F5, F6, F7, F8, G1, G2, G3, G4, G5, G6,
