@@ -10,4 +10,6 @@ BKN = pygame.image.load('images/siyahAt.png')
 WKN = pygame.image.load('images/beyazAt.png')
 BK = pygame.image.load('images/siyahŞah.png')
 WK = pygame.image.load('images/beyazŞah.png')
+WP = pygame.image.load('images/beyazPiyon.png')
+BP = pygame.image.load('images/siyahPiyon.png')
 
