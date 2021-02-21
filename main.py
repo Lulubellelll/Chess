@@ -12,12 +12,24 @@ whitesTurn = True
 moveSound = pygame.mixer.Sound('sounds/move.mp3')
 eatSound = pygame.mixer.Sound('sounds/Eat.mp3')
 
+def allEmpty(rookList):
+    for i in rookList:
+        if i == 'Empty':
+            return True
+        else:
+            return False
+
+
 # Run until the user asks to quit
 running = True
 while running:
 
     # Definitions
     (mx, my) = pygame.mouse.get_pos()
+    uzunBeyazRok = [B1.onIt, C1.onIt, D1.onIt]
+    kısaBeyazRok = [F1.onIt, G1.onIt]
+    uzunSiyahRok = [B8.onIt, C8.onIt, D8.onIt]
+    kısaSiyahRok = [F8.onIt, G8.onIt]
 
     # Events
     for event in pygame.event.get():
@@ -34,6 +46,179 @@ while running:
             for e in kares:
                 # Pick
                 if mx in range(e.sq[0], e.sq[1]) and my in range(e.sq[2], e.sq[3]):
+
+                    # Special Situations
+                    if e.KARE.onIt == BS and whitesTurn and not reClick and not BS.threatened:
+                        if allEmpty(uzunBeyazRok) and BS.fm and BK1.fm:
+                            BK1.rookability = True
+                        if allEmpty(kısaBeyazRok) and BS.fm and BK2.fm:
+                            BK2.rookability = True
+                    elif e.KARE.onIt == BS and whitesTurn and reClick:
+                        # Düzeltemeler
+                        for x in kareler:
+                            if x.onIt != 'Empty':
+                                if x.onIt.pressed:
+                                    x.onIt.pressed = False
+                        for elements in squares:
+                            if elements[5]:
+                                elements[5] = False
+                            else:
+                                pass
+                        for elements in squares:
+                            if elements[6]:
+                                elements[6] = False
+                            else:
+                                pass
+                        for b in rooks:
+                            b.rookability = False
+                    if e.KARE.onIt == SS and not whitesTurn and not reClick and not SS.threatened:
+                        if allEmpty(uzunSiyahRok) and SS.fm and SK1.fm:
+                            SK1.rookability = True
+                        if allEmpty(kısaSiyahRok) and SS.fm and SK2.fm:
+                            SK2.rookability = True
+                    elif e.KARE.onIt == SS and not whitesTurn and reClick:
+                        for x in kareler:
+                            if x.onIt != 'Empty':
+                                if x.onIt.pressed:
+                                    x.onIt.pressed = False
+                        for elements in squares:
+                            if elements[5]:
+                                elements[5] = False
+                            else:
+                                pass
+                        for elements in squares:
+                            if elements[6]:
+                                elements[6] = False
+                            else:
+                                pass
+                        for b in rooks:
+                            b.rookability = False
+
+                    if e.KARE.onIt in rooks:
+                        if e.KARE.onIt == BK1 and BK1.rookability:
+
+                            # Düzeltemeler
+                            for x in kareler:
+                                if x.onIt != 'Empty':
+                                    if x.onIt.pressed:
+                                        x.onIt.pressed = False
+                            for elements in squares:
+                                if elements[5]:
+                                    elements[5] = False
+                                else:
+                                    pass
+                            for elements in squares:
+                                if elements[6]:
+                                    elements[6] = False
+                                else:
+                                    pass
+                            for b in rooks:
+                                b.rookability = False
+
+                            Choosen.clear()
+                            BS.posx = c1[0]
+                            BS.posy = c1[2]
+                            BK1.posx = d1[0]
+                            BK1.posy= d1[2]
+                            D1.onIt = BK1
+                            e.KARE.change_onIt('Empty')
+                            E1.change_onIt('Empty')
+                            E1.change_sit('empty')
+                            whitesTurn = not whitesTurn
+                            moveSound.play()
+                        if e.KARE.onIt == BK2 and BK2.rookability:
+
+                            # Düzeltemeler
+                            for x in kareler:
+                                if x.onIt != 'Empty':
+                                    if x.onIt.pressed:
+                                        x.onIt.pressed = False
+                            for elements in squares:
+                                if elements[5]:
+                                    elements[5] = False
+                                else:
+                                    pass
+                            for elements in squares:
+                                if elements[6]:
+                                    elements[6] = False
+                                else:
+                                    pass
+                            for b in rooks:
+                                b.rookability = False
+
+                            Choosen.clear()
+                            BS.posx = g1[0]
+                            BS.posy = g1[2]
+                            BK2.posx = f1[0]
+                            BK2.posy = f1[2]
+                            F1.onIt = BK1
+                            e.KARE.change_onIt('Empty')
+                            E1.change_onIt('Empty')
+                            E1.change_sit('empty')
+                            whitesTurn = not whitesTurn
+                            moveSound.play()
+                        if e.KARE.onIt == SK1 and SK1.rookability:
+
+                            # Düzeltemeler
+                            for x in kareler:
+                                if x.onIt != 'Empty':
+                                    if x.onIt.pressed:
+                                        x.onIt.pressed = False
+                            for elements in squares:
+                                if elements[5]:
+                                    elements[5] = False
+                                else:
+                                    pass
+                            for elements in squares:
+                                if elements[6]:
+                                    elements[6] = False
+                                else:
+                                    pass
+                            for b in rooks:
+                                b.rookability = False
+
+                            Choosen.clear()
+                            SS.posx = c8[0]
+                            SS.posy = c8[2]
+                            SK1.posx = d8[0]
+                            SK1.posy= d8[2]
+                            D8.onIt = SK1
+                            e.KARE.change_onIt('Empty')
+                            E8.change_onIt('Empty')
+                            E8.change_sit('empty')
+                            whitesTurn = not whitesTurn
+                            moveSound.play()
+                        if e.KARE.onIt == SK2 and SK2.rookability:
+
+                            # Düzeltemeler
+                            for x in kareler:
+                                if x.onIt != 'Empty':
+                                    if x.onIt.pressed:
+                                        x.onIt.pressed = False
+                            for elements in squares:
+                                if elements[5]:
+                                    elements[5] = False
+                                else:
+                                    pass
+                            for elements in squares:
+                                if elements[6]:
+                                    elements[6] = False
+                                else:
+                                    pass
+                            for b in rooks:
+                                b.rookability = False
+
+                            Choosen.clear()
+                            SS.posx = g8[0]
+                            SS.posy = g8[2]
+                            SK2.posx = f8[0]
+                            SK2.posy = f8[2]
+                            F8.onIt = SK1
+                            e.KARE.change_onIt('Empty')
+                            E8.change_onIt('Empty')
+                            E8.change_sit('empty')
+                            whitesTurn = not whitesTurn
+                            moveSound.play()
 
                     # Eat
                     if e.sq[6] and e.sq[5] == False and e.KARE.onIt != 'Empty':
@@ -58,6 +243,9 @@ while running:
                                     elements[6] = False
                                 else:
                                     pass
+
+                            for b in rooks:
+                                b.rookability = False
 
                             veriSaklama.append(e.KARE.onIt)
 
@@ -149,6 +337,9 @@ while running:
                                 else:
                                     pass
 
+                            for b in rooks:
+                                b.rookability = False
+
                             save()
                             seçilmiş = Choosen[0]
                             e.KARE.change_onIt(seçilmiş.onIt)
@@ -196,6 +387,10 @@ while running:
                                 delChoosen()
                             else:
                                 if veriSaklama[0] in pawns:
+                                    veriSaklama[0].change_fm()
+                                if veriSaklama[0] in kings:
+                                    veriSaklama[0].change_fm()
+                                if veriSaklama[0] in rooks:
                                     veriSaklama[0].change_fm()
                                 moveSound.play()
                                 e.KARE.chose = True
@@ -267,6 +462,12 @@ while running:
         if e.onIt == BS or e.onIt == SS:
             if e.onIt.threatened:
                 screen.blit(scSign, (e.id[0], e.id[2]))
+
+        # Rok Özel
+        if e.onIt in rooks:
+            if e.onIt.rookability:
+                screen.blit(tSign, (e.id[0], e.id[2]))
+
 
     # Pieces
     for e in pieces:

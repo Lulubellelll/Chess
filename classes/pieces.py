@@ -32,8 +32,13 @@ class Pieces(object):
 
 
 class Kale(Pieces):
-    def __init__(self, color, alive, posx, posy, img, pressed):
+    def __init__(self, color, alive, posx, posy, img, pressed, rookability, fm):
         super().__init__(color, alive, posx, posy, img, pressed)
+        self.rookability = rookability
+        self.fm = fm
+
+    def change_fm(self):
+        self.fm = False
 
     def threat(self, id, square):
 
@@ -1051,9 +1056,13 @@ class At(Pieces):
 
 
 class Sah(Pieces):
-    def __init__(self, color, alive, posx, posy, img, threatened, pressed):
+    def __init__(self, color, alive, posx, posy, img, threatened, pressed, fm):
         super().__init__(color, alive, posx, posy, img, pressed)
         self.threatened = threatened
+        self.fm = fm
+
+    def change_fm(self):
+        self.fm = False
 
     def true_thr(self):
         self.threatened = True
@@ -1460,10 +1469,10 @@ SF2 = Fil('siyah', True, f8[0], f8[2], 'white', BB, False)
 BF1 = Fil('beyaz', True, c1[0], c1[2], 'white', WB, False)
 BF2 = Fil('beyaz', True, f1[0], f1[2], 'black', WB, False)
 
-SK1 = Kale('siyah', True, a8[0], a8[2], BR, False)
-SK2 = Kale('siyah', True, h8[0], h8[2], BR, False)
-BK1 = Kale('beyaz', True, a1[0], a1[2], WR, False)
-BK2 = Kale('beyaz', True, h1[0], h1[2], WR, False)
+SK1 = Kale('siyah', True, a8[0], a8[2], BR, False, False, True)
+SK2 = Kale('siyah', True, h8[0], h8[2], BR, False, False, True)
+BK1 = Kale('beyaz', True, a1[0], a1[2], WR, False, False, True)
+BK2 = Kale('beyaz', True, h1[0], h1[2], WR, False, False, True)
 BV = Vezir('beyaz', True, d1[0], d1[2], WQ, False)
 SV = Vezir('siyah', True, d8[0], d8[2], BQ, False)
 
@@ -1472,8 +1481,8 @@ SA2 = At('siyah', True, g8[0], g8[2], BKN, False)
 BA1 = At('beyaz', True, g1[0], g1[2], WKN, False)
 BA2 = At('beyaz', True, b1[0], b1[2], WKN, False)
 
-BS = Sah('beyaz', True, e1[0], e1[2], WK, False, False)
-SS = Sah('siyah', True, e8[0], e8[2], BK, False, False)
+BS = Sah('beyaz', True, e1[0], e1[2], WK, False, False, True)
+SS = Sah('siyah', True, e8[0], e8[2], BK, False, False, True)
 
 BP1 = Piyon('beyaz', True, a2[0], a2[2], WP, True, False, False)
 BP2 = Piyon('beyaz', True, b2[0], b2[2], WP, True, False, False)
@@ -1496,6 +1505,10 @@ pieces = [SF1, SF2, BF1, BF2, SK1, SK2, BV, SA1, SA2, SS, BK1, BK2, BA1, BA2, BS
           BP3, BP4, BP5, BP6, BP7, BP8, SP1, SP2, SP3, SP4, SP5, SP6, SP7, SP8]
 
 pawns = [BP1, BP2, BP3, BP4, BP5, BP6, BP7, BP8, SP1, SP2, SP3, SP4, SP5, SP6, SP7, SP8]
+
+rooks = [SK1, SK2, BK1, BK2]
+
+kings = [BS, SS]
 
 
 # FUNCTIONS
@@ -1536,6 +1549,7 @@ def save():
     for elements in Choosen:
         veriSaklama.append(elements.onIt)
         print(veriSaklama, 'BURASI VERİ SAKLAMA')
+
 
 def delVeri():
     veriSaklama.clear()
