@@ -12,12 +12,42 @@ whitesTurn = True
 moveSound = pygame.mixer.Sound('sounds/move.mp3')
 eatSound = pygame.mixer.Sound('sounds/Eat.mp3')
 
+
 def allEmpty(rookList):
+    a = 0
     for i in rookList:
-        if i == 'Empty':
-            return True
-        else:
-            return False
+        if i.onIt == 'Empty':
+            a += 1
+    if a == len(rookList):
+        return True
+    else:
+        return False
+
+
+def allSafeS(rookList):
+    delThs()
+    defthreats()
+    a = 0
+    for i in rookList:
+        if i.id[4] in Stnew:
+            a += 1
+    if a > 0:
+        return False
+    else:
+        return True
+
+
+def allSafeB(rookList):
+    delThs()
+    defthreats()
+    a = 0
+    for i in rookList:
+        if i.id[4] in Stnew:
+            a += 1
+    if a > 0:
+        return False
+    else:
+        return True
 
 
 # Run until the user asks to quit
@@ -26,10 +56,10 @@ while running:
 
     # Definitions
     (mx, my) = pygame.mouse.get_pos()
-    uzunBeyazRok = [B1.onIt, C1.onIt, D1.onIt]
-    kısaBeyazRok = [F1.onIt, G1.onIt]
-    uzunSiyahRok = [B8.onIt, C8.onIt, D8.onIt]
-    kısaSiyahRok = [F8.onIt, G8.onIt]
+    uzunBeyazRok = [B1, C1, D1]
+    kısaBeyazRok = [F1, G1]
+    uzunSiyahRok = [B1, C8, D8]
+    kısaSiyahRok = [F8, G8]
 
     # Events
     for event in pygame.event.get():
@@ -49,12 +79,17 @@ while running:
 
                     # Special Situations
                     if e.KARE.onIt == BS and whitesTurn and not reClick and not BS.threatened:
-                        if allEmpty(uzunBeyazRok) and BS.fm and BK1.fm:
+                        if allEmpty(uzunBeyazRok) and BS.fm and BK1.fm and allSafeB(uzunBeyazRok):
                             BK1.rookability = True
-                        if allEmpty(kısaBeyazRok) and BS.fm and BK2.fm:
+                        else:
+                            delThs()
+                        if allEmpty(kısaBeyazRok) and BS.fm and BK2.fm and allSafeB(kısaBeyazRok):
                             BK2.rookability = True
+                        else:
+                            delThs()
                     elif e.KARE.onIt == BS and whitesTurn and reClick:
                         # Düzeltemeler
+                        delThs()
                         for x in kareler:
                             if x.onIt != 'Empty':
                                 if x.onIt.pressed:
@@ -72,11 +107,16 @@ while running:
                         for b in rooks:
                             b.rookability = False
                     if e.KARE.onIt == SS and not whitesTurn and not reClick and not SS.threatened:
-                        if allEmpty(uzunSiyahRok) and SS.fm and SK1.fm:
+                        if allEmpty(uzunSiyahRok) and SS.fm and SK1.fm and allSafeS(uzunSiyahRok):
                             SK1.rookability = True
-                        if allEmpty(kısaSiyahRok) and SS.fm and SK2.fm:
+                        else:
+                            delThs()
+                        if allEmpty(kısaSiyahRok) and SS.fm and SK2.fm and allSafeS(kısaSiyahRok):
                             SK2.rookability = True
+                        else:
+                            delThs()
                     elif e.KARE.onIt == SS and not whitesTurn and reClick:
+                        delThs()
                         for x in kareler:
                             if x.onIt != 'Empty':
                                 if x.onIt.pressed:
@@ -119,7 +159,7 @@ while running:
                             BS.posx = c1[0]
                             BS.posy = c1[2]
                             BK1.posx = d1[0]
-                            BK1.posy= d1[2]
+                            BK1.posy = d1[2]
                             D1.onIt = BK1
                             e.KARE.change_onIt('Empty')
                             E1.change_onIt('Empty')
@@ -181,7 +221,7 @@ while running:
                             SS.posx = c8[0]
                             SS.posy = c8[2]
                             SK1.posx = d8[0]
-                            SK1.posy= d8[2]
+                            SK1.posy = d8[2]
                             D8.onIt = SK1
                             e.KARE.change_onIt('Empty')
                             E8.change_onIt('Empty')
@@ -467,7 +507,6 @@ while running:
         if e.onIt in rooks:
             if e.onIt.rookability:
                 screen.blit(tSign, (e.id[0], e.id[2]))
-
 
     # Pieces
     for e in pieces:

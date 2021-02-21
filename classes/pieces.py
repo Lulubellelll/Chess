@@ -490,9 +490,10 @@ class Vezir(Pieces):
                 if (id + 9 * i) in fulls:
                     if square.onIt.color == 'beyaz':
                         Bthreats.append(id + 9 * i)
+                        break
                     else:
                         Sthreats.append(id + 9 * i)
-                    break
+                        break
                 else:
                     if square.onIt.color == 'beyaz':
                         Bthreats.append(id + 9 * i)
@@ -503,9 +504,10 @@ class Vezir(Pieces):
                 if (id + 9 * i) in fulls:
                     if square.onIt.color == 'beyaz':
                         Bthreats.append(id + 9 * i)
+                        break
                     else:
                         Sthreats.append(id + 9 * i)
-                    break
+                        break
                 else:
                     if square.onIt.color == 'beyaz':
                         Bthreats.append(id + 9 * i)
@@ -518,9 +520,10 @@ class Vezir(Pieces):
                 if (id - 9 * i) in fulls:
                     if square.onIt.color == 'beyaz':
                         Bthreats.append(id - 9 * i)
+                        break
                     else:
                         Sthreats.append(id - 9 * i)
-                    break
+                        break
                 else:
                     if square.onIt.color == 'beyaz':
                         Bthreats.append(id - 9 * i)
@@ -531,9 +534,10 @@ class Vezir(Pieces):
                 if (id - 9 * i) in fulls:
                     if square.onIt.color == 'beyaz':
                         Bthreats.append(id - 9 * i)
+                        break
                     else:
                         Sthreats.append(id - 9 * i)
-                    break
+                        break
                 else:
                     if square.onIt.color == 'beyaz':
                         Bthreats.append(id - 9 * i)
@@ -546,9 +550,10 @@ class Vezir(Pieces):
                 if (id + 7 * i) in fulls:
                     if square.onIt.color == 'beyaz':
                         Bthreats.append(id + 7 * i)
+                        break
                     else:
                         Sthreats.append(id + 7 * i)
-                    break
+                        break
                 else:
                     if square.onIt.color == 'beyaz':
                         Bthreats.append(id + 7 * i)
@@ -559,9 +564,10 @@ class Vezir(Pieces):
                 if (id + 7 * i) in fulls:
                     if square.onIt.color == 'beyaz':
                         Bthreats.append(id + 7 * i)
+                        break
                     else:
                         Sthreats.append(id + 7 * i)
-                    break
+                        break
                 else:
                     if square.onIt.color == 'beyaz':
                         Bthreats.append(id + 7 * i)
@@ -574,9 +580,10 @@ class Vezir(Pieces):
                 if (id - 7 * i) in fulls:
                     if square.onIt.color == 'beyaz':
                         Bthreats.append(id - 7 * i)
+                        break
                     else:
                         Sthreats.append(id - 7 * i)
-                    break
+                        break
                 else:
                     if square.onIt.color == 'beyaz':
                         Bthreats.append(id - 7 * i)
@@ -587,9 +594,10 @@ class Vezir(Pieces):
                 if (id - 7 * i) in fulls:
                     if square.onIt.color == 'beyaz':
                         Bthreats.append(id - 7 * i)
+                        break
                     else:
                         Sthreats.append(id - 7 * i)
-                    break
+                        break
                 else:
                     if square.onIt.color == 'beyaz':
                         Bthreats.append(id - 7 * i)
@@ -601,9 +609,10 @@ class Vezir(Pieces):
             if (id + 1 * i) in fulls:
                 if square.onIt.color == 'beyaz':
                     Bthreats.append(id + 1 * i)
+                    break
                 else:
                     Sthreats.append(id + 1 * i)
-                break
+                    break
             else:
                 if square.onIt.color == 'beyaz':
                     Bthreats.append(id + 1 * i)
@@ -615,9 +624,10 @@ class Vezir(Pieces):
             if (id - 1 * i) in fulls:
                 if square.onIt.color == 'beyaz':
                     Bthreats.append(id - 1 * i)
+                    break
                 else:
                     Sthreats.append(id - 1 * i)
-                break
+                    break
             else:
                 if square.onIt.color == 'beyaz':
                     Bthreats.append(id - 1 * i)
@@ -629,9 +639,10 @@ class Vezir(Pieces):
             if (id - 8 * i) in fulls:
                 if square.onIt.color == 'beyaz':
                     Bthreats.append(id - 8 * i)
+                    break
                 else:
                     Sthreats.append(id - 8 * i)
-                break
+                    break
             else:
                 if square.onIt.color == 'beyaz':
                     Bthreats.append(id - 8 * i)
@@ -643,9 +654,10 @@ class Vezir(Pieces):
             if (id + 8 * i) in fulls:
                 if square.onIt.color == 'beyaz':
                     Bthreats.append(id + 8 * i)
+                    break
                 else:
                     Sthreats.append(id + 8 * i)
-                break
+                    break
             else:
                 if square.onIt.color == 'beyaz':
                     Bthreats.append(id + 8 * i)
@@ -1218,7 +1230,7 @@ class Sah(Pieces):
 
         # Sol
         if süt != 1:
-            if (id + 1) in fulls:
+            if (id - 1) in fulls:
                 tehditfulls.append(id - 1)
             else:
                 ids.append(id - 1)
@@ -1275,6 +1287,8 @@ class Sah(Pieces):
                 elements[6] = True
             else:
                 pass
+
+        print('IDS: ', ids)
 
         ids.clear()
         Sthreats.clear()
@@ -1516,6 +1530,12 @@ def delChoosen():
     Choosen.clear()
 
 
+def delThs():
+    Stnew.clear()
+    Btnew.clear()
+    threats.clear()
+
+
 def del_dup(test_list):
     return list(dict.fromkeys(test_list))
 
@@ -1539,10 +1559,12 @@ def defthreats():
             Btnew.append(i)
 
     Sthreats = Stnew
-    print('Stnew:', Stnew)
+    del_dup(Stnew)
+    print('Stnew:', len(Stnew))
 
     Bthreats = Btnew
-    print('Btnew:', Btnew)
+    del_dup(Btnew)
+    print('Btnew:', len(Btnew))
 
 
 def save():
